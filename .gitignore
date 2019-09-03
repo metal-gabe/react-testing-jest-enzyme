@@ -3,4 +3,4 @@
 *.sublime-workspace
 
 /node_modules
-node_modules/
+click-counter/node_modules/
