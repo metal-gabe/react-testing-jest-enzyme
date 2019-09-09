@@ -1,6 +1,11 @@
+# invisible files
 .DS_store
-*.sublime-project
-*.sublime-workspace
 
+# dependencies
 /node_modules
 click-counter/node_modules/
+
+# project files
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
