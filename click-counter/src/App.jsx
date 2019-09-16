@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div data-test="component-app">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Bueller lives here.</p>
+        <h1 data-test="counter-display">The counter is currently...</h1>
+        <button data-test="increment-button" type="">Increment counter</button>
       </div>
     );
   };
