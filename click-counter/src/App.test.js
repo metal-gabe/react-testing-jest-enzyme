@@ -18,7 +18,6 @@ const setup = (props={}, state=null) => {
   return shallow(<App {...props} />);
 };
 
-
 /**
  * Return ShallowWrapper containing node(s) with the given data-test value.
  * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper to search within.
