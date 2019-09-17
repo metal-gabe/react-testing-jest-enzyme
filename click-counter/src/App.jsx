@@ -13,19 +13,30 @@ class App extends Component {
     [
       // prettier-ignore
       'handleClick',
-      'resetCounter',
     ].forEach(m => {
       this[m] = this[m].bind(this);
     });
   }
 
-  handleClick() {
+  handleClick(operator) {
     const { counter } = this.state;
-    this.setState({ counter: counter + 1 });
-  }
-
-  resetCounter() {
-    this.setState({ counter: 0 });
+    switch (operator) {
+      case 'add':
+        this.setState({ counter: counter + 1 });
+        break;
+      case 'subtract':
+        this.setState({ counter: counter - 1 });
+        break;
+      case 'multiply':
+        this.setState({ counter: counter * 2 });
+        break;
+      case 'divide':
+        this.setState({ counter: counter / 2 });
+        break;
+      default:
+        this.setState({ counter: 0 });
+        break;
+    }
   }
 
   render() {
@@ -36,14 +47,19 @@ class App extends Component {
         <h1 data-test="counter-display">
           The counter is currently... {counter}
         </h1>
-        <button data-test="increment-button" onClick={this.handleClick}>
-          Increment counter
+        <button
+          data-test="increment-button"
+          onClick={() => this.handleClick('add')}
+        >
+          Increment Counter
         </button>
         <button
-          data-test="reset-button"
-          className="counter-reset"
-          onClick={this.resetCounter}
+          data-test="decrement-button"
+          onClick={() => this.handleClick('subtract')}
         >
+          Decrement Counter
+        </button>
+        <button data-test="reset-button" onClick={this.handleClick}>
           Reset Counter
         </button>
       </div>
