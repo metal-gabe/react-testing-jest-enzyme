@@ -41,15 +41,7 @@ it('renders without error', () => {
   // Then
   expect(appComponent.length).toBe(1);
 });
-it('renders increment button', () => {
-  // When
-  const wrapper = setup();
-  const button = findByTestAttr(wrapper, 'increment-button');
-
-  // Then
-  expect(button.length).toBe(1);
-});
-it('renders counter display', () => {
+it('renders the counter display', () => {
   // When
   const wrapper = setup();
   const counterDisplay = findByTestAttr(wrapper, 'counter-display');
@@ -57,7 +49,7 @@ it('renders counter display', () => {
   // Then
   expect(counterDisplay.length).toBe(1);
 });
-it('counter starts at 0', () => {
+it('starts the counter display at 0', () => {
   // When
   const wrapper = setup();
   const initialCounterState = wrapper.state('counter');
@@ -65,7 +57,31 @@ it('counter starts at 0', () => {
   // Then
   expect(initialCounterState).toBe(0);
 });
-it('clicking button increments counter display', () => {
+it('renders the Increment button', () => {
+  // When
+  const wrapper = setup();
+  const button = findByTestAttr(wrapper, 'increment-button');
+
+  // Then
+  expect(button.length).toBe(1);
+});
+it('renders the Decrement button', () => {
+  // When
+  const wrapper = setup();
+  const button = findByTestAttr(wrapper, 'decrement-button');
+
+  // Then
+  expect(button.length).toBe(1);
+});
+it('renders the Reset button', () => {
+  // When
+  const wrapper = setup();
+  const button = findByTestAttr(wrapper, 'reset-button');
+
+  // Then
+  expect(button.length).toBe(1);
+});
+it('increases counter display by 1 when clicking the Increment button', () => {
   // When
   const counter = 7;
   const wrapper = setup(null, { counter });
@@ -79,4 +95,29 @@ it('clicking button increments counter display', () => {
 
   // Then
   expect(counterDisplay.text()).toContain(counter + 1);
+});
+it('decreases counter display by 1 when clicking the Decrement button', () => {
+  // When
+  const counter = 7;
+  const wrapper = setup(null, { counter });
+
+  // Find button and click
+  const button = findByTestAttr(wrapper, 'decrement-button');
+  button.simulate('click');
+
+  // Find display and test value
+  const counterDisplay = findByTestAttr(wrapper, 'counter-display');
+
+  // Then
+  expect(counterDisplay.text()).toContain(counter - 1);
+});
+it('renders an error message when counter tries to go below 0', () => {
+  // When
+  const wrapper = setup();
+  const button = findByTestAttr(wrapper, 'decrement-button');
+  button.simulate('click');
+  const error = findByTestAttr(wrapper, 'counter-error');
+
+  // Then
+  expect(error.length).toBe(1);
 });
