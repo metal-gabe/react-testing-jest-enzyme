@@ -3,7 +3,9 @@
 
 # dependencies
 /node_modules
+node_modules/
 click-counter/node_modules/
+jotto-app/node_modules/
 
 # project files
 *.code-workspace
