@@ -1,13 +1,16 @@
-# invisible files
+# Miscellaneous
 .DS_store
 
-# dependencies
+# Directories
 /node_modules
 node_modules/
 click-counter/node_modules/
 jotto-app/node_modules/
 
-# project files
+# Logs
+.byebug_history
+
+# Project Files
 *.code-workspace
 *.sublime-project
 *.sublime-workspace
