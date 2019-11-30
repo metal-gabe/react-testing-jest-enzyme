@@ -15,7 +15,6 @@ import { findByTestAttr } from '../test/testUtils';
 
 // styles
 
-
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 /**
@@ -30,19 +29,27 @@ const setup = (props = {}) => {
 
 it ('renders without error', () => {
   // When
-
+  const wrapper = setup();
+  const component = findByTestAttr(wrapper, 'component-congrats');
 
   // Then
-})
+  expect(component.length).toBe(1);
+});
+
 it ('renders no text when "success" prop is false', () => {
   // When
-
+  const wrapper = setup({ success: false });
+  const component = findByTestAttr(wrapper, 'component-congrats');
 
   // Then
-})
+  expect(component.text()).toBe('');
+});
+
 it ('renders non-empty congrats message when "success" prop is true', () => {
   // When
-
+  const wrapper = setup({ success: true });
+  const message = findByTestAttr(wrapper, 'congrats-message');
 
   // Then
-})
+  expect(message.text().length).not.toBe(0);
+});

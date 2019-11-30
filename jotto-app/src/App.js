@@ -1,5 +1,19 @@
+// packages
 import React from 'react';
+
+// context
+
+// components
+import Congrats from './Congrats';
+
+// assets
 import logo from './logo.svg';
+
+// constants
+
+// utils / methods
+
+// styles
 import './App.css';
 
 function App() {
@@ -7,9 +21,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Congrats />
         <p>Bueller's in town, fellas!!!</p>
       </header>
     </div>

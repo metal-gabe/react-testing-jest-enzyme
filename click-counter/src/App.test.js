@@ -1,8 +1,23 @@
+// ---------------------------------------------
+// ALL IMPORTS
+// ---------------------------------------------
+// packages
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 
+// context
+
+// components
 import App from "./App";
+
+// assets
+
+// constants
+
+// utils / methods
+
+// styles
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
@@ -41,6 +56,7 @@ it('renders without error', () => {
   // Then
   expect(appComponent.length).toBe(1);
 });
+
 it('renders the counter display', () => {
   // When
   const wrapper = setup();
@@ -49,6 +65,7 @@ it('renders the counter display', () => {
   // Then
   expect(counterDisplay.length).toBe(1);
 });
+
 it('starts the counter display at 0', () => {
   // When
   const wrapper = setup();
@@ -57,6 +74,7 @@ it('starts the counter display at 0', () => {
   // Then
   expect(initialCounterState).toBe(0);
 });
+
 it('renders the Increment button', () => {
   // When
   const wrapper = setup();
@@ -65,6 +83,7 @@ it('renders the Increment button', () => {
   // Then
   expect(button.length).toBe(1);
 });
+
 it('renders the Decrement button', () => {
   // When
   const wrapper = setup();
@@ -73,6 +92,7 @@ it('renders the Decrement button', () => {
   // Then
   expect(button.length).toBe(1);
 });
+
 it('renders the Reset button', () => {
   // When
   const wrapper = setup();
@@ -81,6 +101,7 @@ it('renders the Reset button', () => {
   // Then
   expect(button.length).toBe(1);
 });
+
 it('increases counter display by 1 when clicking the Increment button', () => {
   // When
   const counter = 7;
@@ -96,6 +117,7 @@ it('increases counter display by 1 when clicking the Increment button', () => {
   // Then
   expect(counterDisplay.text()).toContain(counter + 1);
 });
+
 it('decreases counter display by 1 when clicking the Decrement button', () => {
   // When
   const counter = 7;
@@ -111,6 +133,7 @@ it('decreases counter display by 1 when clicking the Decrement button', () => {
   // Then
   expect(counterDisplay.text()).toContain(counter - 1);
 });
+
 it('renders an error message when counter tries to go below 0', () => {
   // When
   const wrapper = setup();
