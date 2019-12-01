@@ -34,12 +34,10 @@ const setup = (props = {}) => {
 // ---------------------------------------------
 // START OF ALL TESTS
 // ---------------------------------------------
-
 it('renders without error', () => {
   // When
   const wrapper = setup({ success: false });
   const component = findByTestAttr(wrapper, 'component-congrats');
-
   // Then
   expect(component.length).toBe(1);
 });
@@ -48,7 +46,6 @@ it('renders no text when "success" prop is false', () => {
   // When
   const wrapper = setup({ success: false });
   const component = findByTestAttr(wrapper, 'component-congrats');
-
   // Then
   expect(component.text()).toBe('');
 });
@@ -57,7 +54,6 @@ it('renders non-empty congrats message when "success" prop is true', () => {
   // When
   const wrapper = setup({ success: true });
   const message = findByTestAttr(wrapper, 'congrats-message');
-
   // Then
   expect(message.text().length).not.toBe(0);
 });
@@ -65,7 +61,6 @@ it('renders non-empty congrats message when "success" prop is true', () => {
 it('does not throw warning with expected props', () => {
   // When
   const expectedProps = { success: false };
-
   // Then
   checkProps(Congrats, expectedProps);
 });

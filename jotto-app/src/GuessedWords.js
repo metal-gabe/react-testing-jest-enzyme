@@ -18,7 +18,18 @@ import PropTypes from 'prop-types';
 // styles
 
 const GuessedWords = props => {
-  //
+  const { guessedWords } = props;
+
+  let guessedWordsContent;
+  if (!guessedWords.length) {
+    guessedWordsContent = (
+      <span data-test="guess-instructions">Try to guess the secret word!</span>
+    );
+  }
+
+  return (
+    <div data-test="component-guessed-words">{guessedWordsContent}</div>
+  );
 };
 
 GuessedWords.propTypes = {

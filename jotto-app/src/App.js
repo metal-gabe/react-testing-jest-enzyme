@@ -5,6 +5,7 @@ import React from 'react';
 
 // components
 import Congrats from './Congrats';
+import GuessedWords from './GuessedWords';
 
 // assets
 import logo from './logo.svg';
@@ -17,12 +18,15 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const success = false;
+  const guessedWords = [];
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Congrats success />
-        <p>Bueller's in town, fellas!!!</p>
+        <Congrats success={success} />
+        <GuessedWords guessedWords={guessedWords} />
       </header>
     </div>
   );
