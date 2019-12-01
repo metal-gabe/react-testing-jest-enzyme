@@ -11,11 +11,14 @@ import Congrats from './Congrats';
 // constants
 
 // utils / methods
-import { findByTestAttr } from '../test/testUtils';
+import { checkProps, findByTestAttr } from '../test/testUtils';
 
 // styles
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
+const defaultProps = {
+  success: false,
+};
 
 /**
  * Factory function to create a ShallowWrapper for the Congrats component.
@@ -24,19 +27,20 @@ Enzyme.configure({ adapter: new EnzymeAdapter() });
  * @returns {ShallowWrapper}
  */
 const setup = (props = {}) => {
-  return shallow(<Congrats {...props} />);
+  const setupProps = { ...defaultProps, ...props };
+  return shallow(<Congrats {...setupProps} />);
 };
 
-it ('renders without error', () => {
+it('renders without error', () => {
   // When
-  const wrapper = setup();
+  const wrapper = setup({ success: false });
   const component = findByTestAttr(wrapper, 'component-congrats');
 
   // Then
   expect(component.length).toBe(1);
 });
 
-it ('renders no text when "success" prop is false', () => {
+it('renders no text when "success" prop is false', () => {
   // When
   const wrapper = setup({ success: false });
   const component = findByTestAttr(wrapper, 'component-congrats');
@@ -45,11 +49,19 @@ it ('renders no text when "success" prop is false', () => {
   expect(component.text()).toBe('');
 });
 
-it ('renders non-empty congrats message when "success" prop is true', () => {
+it('renders non-empty congrats message when "success" prop is true', () => {
   // When
   const wrapper = setup({ success: true });
   const message = findByTestAttr(wrapper, 'congrats-message');
 
   // Then
   expect(message.text().length).not.toBe(0);
+});
+
+it('does not throw warning with expected props', () => {
+  // When
+  const expectedProps = { success: false };
+
+  // Then
+  checkProps(Congrats, expectedProps);
 });

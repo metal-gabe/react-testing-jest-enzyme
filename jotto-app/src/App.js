@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Congrats />
+        <Congrats success />
         <p>Bueller's in town, fellas!!!</p>
       </header>
     </div>
