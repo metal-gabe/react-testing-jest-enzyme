@@ -17,8 +17,17 @@ import PropTypes from 'prop-types';
 
 // styles
 
-const GuessedWords = props => {};
+const GuessedWords = props => {
+  //
+};
 
-GuessedWord.propTypes = {};
+GuessedWords.propTypes = {
+  guessedWords: PropTypes.arrayOf(
+    PropTypes.shape({
+      guessedWord: PropTypes.string.isRequired,
+      letterMatchCount: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+};
 
 export default GuessedWords;

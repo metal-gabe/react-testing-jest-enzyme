@@ -31,6 +31,10 @@ const setup = (props = {}) => {
   return shallow(<Congrats {...setupProps} />);
 };
 
+// ---------------------------------------------
+// START OF ALL TESTS
+// ---------------------------------------------
+
 it('renders without error', () => {
   // When
   const wrapper = setup({ success: false });
