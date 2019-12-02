@@ -1,6 +1,6 @@
-// ---------------------------------------------
+// ---------------------------------------------------------------------
 // ALL IMPORTS
-// ---------------------------------------------
+// ---------------------------------------------------------------------
 // packages
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -17,6 +17,9 @@ import PropTypes from 'prop-types';
 
 // styles
 
+// ---------------------------------------------------------------------
+// START OF FUNCTIONAL COMPONENT
+// ---------------------------------------------------------------------
 /**
  * Functional React component for congratulatory message.
  * @function
@@ -24,7 +27,7 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} - Rendered component (or null if "success" prop is false)
  */
 
-const Congrats = (props) => {
+const Congrats = props => {
   const { success } = props;
 
   if (success) {
@@ -38,6 +41,9 @@ const Congrats = (props) => {
   }
 };
 
+// ---------------------------------------------------------------------
+// PROP TYPES DECLARATIONS
+// ---------------------------------------------------------------------
 Congrats.propTypes = {
   success: PropTypes.bool.isRequired,
 };
