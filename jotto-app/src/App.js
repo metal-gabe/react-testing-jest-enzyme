@@ -28,8 +28,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      success: false,
-      guessedWords: [],
+      success: true,
+      guessedWords: [
+        { guessedWord: 'train', letterMatchCount: 3 },
+      ],
     };
   }
 
@@ -39,6 +41,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <h1 className="App-title">Jotto Game</h1>
           <img src={logo} className="App-logo" alt="logo" />
           <Congrats success={success} />
           <GuessedWords guessedWords={guessedWords} />

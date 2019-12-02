@@ -2,19 +2,24 @@
   text-align: center;
 }
 
+.App-title {
+  font-family: cursive;
+}
+
 .App-logo {
   height: 40vmin;
 }
 
 .App-header {
+  align-items: center;
   background-color: #282c34;
-  min-height: 100vh;
+  color: #fff;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  font-family: 'Operator Mono', serif;
   font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: start;
+  min-height: 100vh;
 }
 
 .App-link {
