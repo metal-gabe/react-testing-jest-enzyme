@@ -2,7 +2,7 @@
 // ALL IMPORTS
 // ---------------------------------------------------------------------
 // packages
-import React from 'react';
+import React, { Component } from 'react';
 
 // context
 
@@ -23,19 +23,29 @@ import './App.css';
 // ---------------------------------------------------------------------
 // START OF FUNCTIONAL COMPONENT
 // ---------------------------------------------------------------------
-function App() {
-  const success = false;
-  const guessedWords = [];
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Congrats success={success} />
-        <GuessedWords guessedWords={guessedWords} />
-      </header>
-    </div>
-  );
+    this.state = {
+      success: false,
+      guessedWords: [],
+    };
+  }
+
+  render() {
+    const { guessedWords, success } = this.state;
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <Congrats success={success} />
+          <GuessedWords guessedWords={guessedWords} />
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
