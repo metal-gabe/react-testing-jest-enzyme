@@ -1,21 +1,21 @@
 // ---------------------------------------------------------------------
 // ALL IMPORTS
 // ---------------------------------------------------------------------
-// packages
+// Packages
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// context
+// Context
 
-// components
+// Components
 
-// assets
+// Assets
 
-// constants
+// Constants
 
-// utils / methods
+// Utils Methods
 
-// styles
+// Styles
 
 // ---------------------------------------------------------------------
 // START OF FUNCTIONAL COMPONENT
