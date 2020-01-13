@@ -22,41 +22,41 @@ import PropTypes from 'prop-types';
 // ---------------------------------------------------------------------
 const GuessedWords = props => {
   const { guessedWords } = props;
-  let guessedWordsContent;
 
-  if (!guessedWords.length) {
-    guessedWordsContent = (
-      <span data-test="guess-instructions">Try to guess the secret word!</span>
-    );
-  } else {
-    guessedWordsContent = (
-      <div data-test="guessed-words">
-        <h3>Guessed Words</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Guess</th>
-              <th>Matching Letters</th>
-            </tr>
-          </thead>
-          <tbody>{
-            guessedWords.map(word => {
-              const { guessedWord, letterMatchCount } = word;
+  return (
+    <div data-test="component-guessed-words">
+      {!guessedWords.length && (
+        <span data-test="guess-instructions">
+          Try to guess the secret word!
+        </span>
+      )}
+      {guessedWords.length && (
+        <div data-test="guessed-words">
+          <h3>Guessed Words</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Guess</th>
+                <th>Matching Letters</th>
+              </tr>
+            </thead>
+            <tbody>
+              {guessedWords.map(word => {
+                const { guessedWord, letterMatchCount } = word;
 
-              return (
-                <tr data-test="guessed-word" key={guessedWord}>
-                  <td>{guessedWord}</td>
-                  <td>{letterMatchCount}</td>
-                </tr>
-              );
-            })
-          }</tbody>
-        </table>
-      </div>
-    );
-  }
-
-  return <div data-test="component-guessed-words">{guessedWordsContent}</div>;
+                return (
+                  <tr data-test="guessed-word" key={guessedWord}>
+                    <td>{guessedWord}</td>
+                    <td>{letterMatchCount}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
 };
 
 // ---------------------------------------------------------------------
@@ -67,7 +67,7 @@ GuessedWords.propTypes = {
     PropTypes.shape({
       guessedWord: PropTypes.string.isRequired,
       letterMatchCount: PropTypes.number.isRequired,
-    })
+    }),
   ).isRequired,
 };
 
