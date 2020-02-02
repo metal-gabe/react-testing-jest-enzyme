@@ -1,37 +1,34 @@
-// ---------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // ALL IMPORTS
-// ---------------------------------------------------------------------
-// packages
+// -----------------------------------------------------------------------------
+// Packages
 import React, { Component } from 'react';
 
-// context
+// Context
 
-// components
+// Components
 import Congrats from './Congrats';
 import GuessedWords from './GuessedWords';
 
-// assets
+// Assets
 import logo from './logo.svg';
 
-// constants
+// Constants
+// Utils Methods
 
-// utils / methods
-
-// styles
+// Styles
 import './App.css';
 
-// ---------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // START OF FUNCTIONAL COMPONENT
-// ---------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       success: true,
-      guessedWords: [
-        { guessedWord: 'train', letterMatchCount: 3 },
-      ],
+      guessedWords: [{ guessedWord: 'train', letterMatchCount: 3 }],
     };
   }
 
