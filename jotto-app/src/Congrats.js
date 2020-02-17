@@ -1,25 +1,20 @@
-// ---------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // ALL IMPORTS
-// ---------------------------------------------------------------------
-// packages
+// -----------------------------------------------------------------------------
+// Packages
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// context
+// Context
+// Components
+// Assets
+// Constants
+// Utils / Methods
+// Styles
 
-// components
-
-// assets
-
-// constants
-
-// utils / methods
-
-// styles
-
-// ---------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // START OF FUNCTIONAL COMPONENT
-// ---------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 /**
  * Functional React component for congratulatory message.
  * @function
@@ -27,23 +22,25 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} - Rendered component (or null if "success" prop is false)
  */
 
-const Congrats = props => {
+const Congrats = function(props) {
   const { success } = props;
 
   if (success) {
     return (
       <div data-test="component-congrats">
-        <span data-test="congrats-message">Congrats! You guessed the word!</span>
+        <span data-test="congrats-message">
+          Congrats! You guessed the word!
+        </span>
       </div>
     );
-  } else {
-    return <div data-test="component-congrats" />;
   }
+
+  return <div data-test="component-congrats" />;
 };
 
-// ---------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // PROP TYPES DECLARATIONS
-// ---------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 Congrats.propTypes = {
   success: PropTypes.bool.isRequired,
 };
