@@ -14,7 +14,7 @@ import GuessedWords from './GuessedWords';
 import logo from './logo.svg';
 
 // Constants
-// Utils Methods
+// Utils / Methods
 
 // Styles
 import './App.css';
