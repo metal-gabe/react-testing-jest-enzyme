@@ -1,19 +1,19 @@
-// packages
+// Packages
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 
-// context
+// Context
 
-// components
+// Components
 import Congrats from './Congrats';
 
-// constants
+// Constants
 
-// utils / methods
+// Utils / Methods
 import { checkProps, findByTestAttr } from '../test/testUtils';
 
-// styles
+// Styles
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 const defaultProps = {
