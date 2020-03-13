@@ -27,7 +27,11 @@ const defaultProps = {
  * @returns {ShallowWrapper}
  */
 const setup = (props = {}) => {
-  const setupProps = { ...defaultProps, ...props };
+  const setupProps = {
+    ...defaultProps,
+    ...props,
+  };
+
   return shallow(<Congrats {...setupProps} />);
 };
 
