@@ -1,28 +1,3 @@
-# Directories
-.expo/
-.idea/
-.settings/
-.vscode/
-bin/
-coverage/
-
-# Debugging & Logs
-.byebug_history
-npm-debug.*
-
 # Node Modules Directories
-/node_modules
-node_modules/
-node_modules/**/*
 click-counter/node_modules/
 jotto-app/node_modules/
-
-# Project Files
-*.code-workspace
-*.sublime-project
-*.sublime-workspace
-.classpath
-.project
-
-# Miscellaneous
-.DS_store
