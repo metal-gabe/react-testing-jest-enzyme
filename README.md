@@ -15,6 +15,13 @@ Jest is a powerful, flexible testing framework, and Enzyme provides tools to tes
 
 Each sub-directory is a separate *`create-react-app`* project. 
 
+### Getting Started 
+1. Navigate to each sub-directory (e.g. Jotto App, Click Counter, etc.) 
+2. If this is your first time, run `npm install` 
+3. To start the server in each, run `npm start` 
+4. To have the tests running live and to monitor them, run `npm test` 
+
+
 #### DISCLAIMER
 
 I am not the owner, author, teacher or an in any way associated with this course, Bonnie or Udemy. I'm just OCD and like to do things like this. :-)
