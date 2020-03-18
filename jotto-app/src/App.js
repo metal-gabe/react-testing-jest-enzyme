@@ -28,7 +28,12 @@ class App extends Component {
 
     this.state = {
       success: true,
-      guessedWords: [{ guessedWord: 'train', letterMatchCount: 3 }],
+      guessedWords: [
+        {
+          guessedWord: 'train',
+          letterMatchCount: 3,
+        },
+      ],
     };
   }
 
@@ -36,7 +41,7 @@ class App extends Component {
     const { guessedWords, success } = this.state;
 
     return (
-      <div className="App">
+      <div className="container">
         <header className="App-header">
           <h1 className="App-title">Jotto Game</h1>
           <img src={logo} className="App-logo" alt="logo" />
