@@ -1,20 +1,35 @@
 // ---------------------------------------------
 // ALL IMPORTS
 // ---------------------------------------------
-// packages
+// React
+import { createStore } from 'redux';
+
+// Packages
 import checkPropTypes from 'check-prop-types';
 
-// context
+// Context
 
-// components
+// Components
+import rootReducer from '../src/reducers';
 
-// assets
+// Assets
+// Constants
+// Utils / Methods
+// Styles
 
-// constants
-
-// utils / methods
-
-// styles
+/* -------------------------------------------------------------------------- */
+/* START OF CUSTOM TEST UTILS / HELPER METHODS */
+/* -------------------------------------------------------------------------- */
+/**
+ * Create a testing store with imported reducers, middleware, and initial state.
+ *  globals: rootReducer.
+ * @param {object} initialState - Initial state for the store.
+ * @function storeFactory
+ * @returns {Store} - Redux store.
+ */
+export const storeFactory = initialState => {
+  return createStore(rootReducer, initialState);
+};
 
 /**
  * Return node(s) with the given data-test attributes.
@@ -31,7 +46,7 @@ export const checkProps = (component, conformingProps) => {
     component.propTypes,
     conformingProps,
     'prop',
-    component.name
+    component.name,
   );
 
   expect(propError).toBeUndefined();
