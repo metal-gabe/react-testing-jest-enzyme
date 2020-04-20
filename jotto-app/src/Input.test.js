@@ -30,7 +30,10 @@ import { findByTestAttr, storeFactory } from '../test/testUtils';
  */
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
-  const wrapper = shallow(<Input store={store} />);
+  const wrapper = shallow(<Input store={store} />)
+    .dive()
+    .dive();
+  return wrapper;
 };
 
 /* -------------------------------------------------------------------------- */
