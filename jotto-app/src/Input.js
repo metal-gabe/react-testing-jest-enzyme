@@ -29,7 +29,7 @@ class Input extends Component {
               data-test="input-box"
               name=""
               onClick=""
-              placeholder="Enter  Your Guess"
+              placeholder="Enter Your Guess"
               type="text"
               value=""
             />
