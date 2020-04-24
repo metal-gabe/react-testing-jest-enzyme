@@ -1,3 +1,21 @@
+/* -------------------------------------------------------------------------- */
+/* ALL IMPORTS */
+/* -------------------------------------------------------------------------- */
+// React
+// Packages
+// Context
+// Components
+// Assets
+// Constants
+
+// Utils / Methods
+import { getLetterMatchCount } from '../helpers';
+
+// Styles
+
+/* -------------------------------------------------------------------------- */
+/* START OF CUSTOM ACTION UTILS EXPORTS */
+/* -------------------------------------------------------------------------- */
 export const actionTypes = {
   CORRECT_GUESS: 'CORRECT_GUESS',
   GUESS_WORD: 'GUESS_WORD',
@@ -11,7 +29,24 @@ export const actionTypes = {
  * @returns {function} - Redux Thunk function.
  */
 export const guessWord = guessedWord => {
+  const { CORRECT_GUESS, GUESS_WORD } = actionTypes;
+
   return function (dispatch, getState) {
-    //
+    const secretWord = getState().secretWord;
+    const letterMatchCount = getLetterMatchCount(guessedWord, secretWord);
+
+    dispatch({
+      payload: {
+        guessedWord,
+        letterMatchCount,
+      },
+      type: GUESS_WORD,
+    });
+
+    if (guessedWord === secretWord) {
+      dispatch({
+        type: CORRECT_GUESS,
+      });
+    }
   };
 };

@@ -1,3 +1,18 @@
+/* -------------------------------------------------------------------------- */
+/* ALL IMPORTS */
+/* -------------------------------------------------------------------------- */
+// React
+// Packages
+// Context
+// Components
+// Assets
+// Constants
+// Utils / Methods
+// Styles
+
+/* -------------------------------------------------------------------------- */
+/* START OF CUSTOM HELPER UTILS EXPORTS */
+/* -------------------------------------------------------------------------- */
 /**
  * @method getLetterMatchCount
  * @param { string } guessedWord - Guessed word.
