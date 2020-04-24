@@ -2,7 +2,7 @@
 // ALL IMPORTS
 // ---------------------------------------------
 // React
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 
 // Packages
 import checkPropTypes from 'check-prop-types';
@@ -10,11 +10,13 @@ import checkPropTypes from 'check-prop-types';
 // Context
 
 // Components
-import rootReducer from '../src/reducers';
-
 // Assets
 // Constants
+
 // Utils / Methods
+import { middleware } from '../src/configureStore';
+import rootReducer from '../src/reducers';
+
 // Styles
 
 /* -------------------------------------------------------------------------- */
@@ -22,13 +24,14 @@ import rootReducer from '../src/reducers';
 /* -------------------------------------------------------------------------- */
 /**
  * Create a testing store with imported reducers, middleware, and initial state.
- *  globals: rootReducer.
+ *  globals: rootReducer, middleware.
  * @param {object} initialState - Initial state for the store.
  * @function storeFactory
  * @returns {Store} - Redux store.
  */
 export const storeFactory = initialState => {
-  return createStore(rootReducer, initialState);
+  const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
+  return createStoreWithMiddleware(rootReducer, initialState);
 };
 
 /**

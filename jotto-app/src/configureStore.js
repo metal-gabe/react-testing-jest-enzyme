@@ -1,4 +1,26 @@
-import { createStore } from 'redux';
+/* -------------------------------------------------------------------------- */
+/**/
+/* -------------------------------------------------------------------------- */
+// React
+
+// Packages
+import { applyMiddleware, createStore } from 'redux';
+import ReduxThunk from 'redux-thunk';
+
+// Context
+// Components
+// Assets
+// Constants
+
+// Utils / Methods
 import rootReducer from './reducers';
 
-export default createStore(rootReducer);
+// Styles
+
+export const middleware = [ReduxThunk];
+
+export const createStoreWithMiddleware = applyMiddleware(...middleware)(
+  createStore,
+);
+
+export default createStoreWithMiddleware(rootReducer);
