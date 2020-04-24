@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- */
-/**/
+/* ALL IMPORTS */
 /* -------------------------------------------------------------------------- */
 // React
 
@@ -17,6 +17,9 @@ import rootReducer from './reducers';
 
 // Styles
 
+/* -------------------------------------------------------------------------- */
+/* EXPORTING ALL CUSTOM STORE CONFIG METHODS */
+/* -------------------------------------------------------------------------- */
 export const middleware = [ReduxThunk];
 
 export const createStoreWithMiddleware = applyMiddleware(...middleware)(
