@@ -18,9 +18,40 @@ import { storeFactory } from '../test/testUtils';
 /* START OF CUSTOM INTEGRATION TESTS */
 /* -------------------------------------------------------------------------- */
 describe('`guessWord` Action Dispatcher', () => {
+  const secretWord = 'party';
+  const unsuccessfulGuess = 'train';
+
   describe('no guessed words', () => {
+    let store;
+    const initialState = {
+      secretWord,
+    };
+
+    beforeEach(() => {
+      store = storeFactory(initialState);
+    });
+
     it('updates state correctly for an unsuccessful guess', () => {
-      // GIVEN// WHEN// THEN
+      // GIVEN
+      const expectedState = {
+        ...initialState,
+        success: false,
+        guessedWords: [
+          {
+            guessedWord: unsuccessfulGuess,
+            letterMatchCount: 3,
+          },
+        ],
+      };
+
+      // WHEN
+      store.dispatch(guessWord(unsuccessfulGuess));
+
+      // GIVEN
+      const newState = store.getState();
+
+      // THEN
+      expect(newState).toEqual(expectedState);
     });
 
     it('updates state correctly for a successful guess', () => {
