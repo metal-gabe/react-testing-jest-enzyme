@@ -47,7 +47,6 @@ describe('getSecretWord action creator', () => {
     // THEN
     return store.dispatch(getSecretWord()).then(() => {
       const newState = store.getState();
-
       expect(newState.secretWord).toBe(secretWord);
     });
   });
