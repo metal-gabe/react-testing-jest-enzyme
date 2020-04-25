@@ -58,7 +58,7 @@ export const getSecretWord = () => {
   const { SET_SECRET_WORD } = actionTypes;
 
   return dispatch => {
-    axios.get('http://localhost:3030/').then(response => {
+    return axios.get('http://localhost:3030/').then(response => {
       dispatch({
         payload: response.data,
         type: SET_SECRET_WORD,
