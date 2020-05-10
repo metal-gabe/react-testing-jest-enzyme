@@ -3,6 +3,7 @@
 /* -------------------------------------------------------------------------- */
 // React
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 // Packages
 // Context
@@ -10,11 +11,14 @@ import React, { Component } from 'react';
 // Components
 import Congrats from './Congrats';
 import GuessedWords from './GuessedWords';
+import Input from './Input';
 
 // Assets
 import logo from './logo.svg';
 // Constants
+
 // Utils / Methods
+import { getSecretWord } from './actions';
 
 // Styles
 import './App.css';
@@ -26,19 +30,11 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      success: false,
-      guessedWords: [
-        {
-          guessedWord: 'train',
-          letterMatchCount: 3,
-        },
-      ],
-    };
+    this.state = {};
   }
 
   render() {
-    const { guessedWords, success } = this.state;
+    const { guessedWords, success } = this.props;
 
     return (
       <div className="container">
@@ -46,6 +42,7 @@ class App extends Component {
           <h1 className="App-title">Jotto Game</h1>
           <img src={logo} className="App-logo" alt="logo" />
           <Congrats success={success} />
+          <Input />
           <GuessedWords guessedWords={guessedWords} />
         </header>
       </div>
@@ -53,4 +50,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  const { guessedWords, secretWord, success } = state;
+  return { guessedWords, secretWord, success };
+};
+
+export default connect(mapStateToProps, { getSecretWord })(App);
