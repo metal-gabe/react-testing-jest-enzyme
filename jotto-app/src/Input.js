@@ -10,7 +10,10 @@ import { connect } from 'react-redux';
 // Components
 // Assets
 // Constants
+
 // Utils / Methods
+import { guessWord } from './actions';
+
 // Styles
 
 /* -------------------------------------------------------------------------- */
@@ -53,4 +56,4 @@ const mapStateToProps = ({ success }) => {
   };
 };
 
-export default connect(mapStateToProps)(Input);
+export default connect(mapStateToProps, { guessWord })(Input);
