@@ -117,4 +117,17 @@ describe('render', () => {
   });
 });
 
-describe('update state', () => {});
+describe('redux props', () => {
+  it('has success piece of state as prop', () => {
+    // GIVEN
+    const success = true;
+    const wrapper = setup({
+      success,
+    });
+    const { success: successProp } = wrapper.instance().props;
+
+    // WHEN
+    // THEN
+    expect(successProp).toBe(success);
+  });
+});

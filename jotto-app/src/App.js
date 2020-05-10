@@ -20,7 +20,7 @@ import logo from './logo.svg';
 import './App.css';
 
 /* -------------------------------------------------------------------------- */
-/* START OF FUNCTIONAL COMPONENT */
+/* START OF MAIN APP COMPONENT */
 /* -------------------------------------------------------------------------- */
 class App extends Component {
   constructor(props) {
