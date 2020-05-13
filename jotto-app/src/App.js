@@ -26,11 +26,21 @@ import './App.css';
 /* -------------------------------------------------------------------------- */
 /* START OF MAIN APP COMPONENT */
 /* -------------------------------------------------------------------------- */
-class App extends Component {
+export class UnconnectedApp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+  }
+
+  /**
+ * @method componentDidMount
+ * @returns {undefined}
+ */
+  componentDidMount() {
+    // get the secret word
+    const { getSecretWord } = this.props;
+    getSecretWord();
   }
 
   render() {
@@ -55,4 +65,4 @@ const mapStateToProps = state => {
   return { guessedWords, secretWord, success };
 };
 
-export default connect(mapStateToProps, { getSecretWord })(App);
+export default connect(mapStateToProps, { getSecretWord })(UnconnectedApp);
