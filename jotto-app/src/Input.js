@@ -2,8 +2,8 @@
 /* ALL IMPORTS */
 /* -------------------------------------------------------------------------- */
 // React
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // Packages
 // Context
@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 // Constants
 
 // Utils / Methods
-import { guessWord } from './actions';
+import { guessWord } from "./actions";
 
 // Styles
 
@@ -20,40 +20,40 @@ import { guessWord } from './actions';
 /* START OF CUSTOM INPUT COMPONENT */
 /* -------------------------------------------------------------------------- */
 class Input extends Component {
-  render() {
-    const { success } = this.props;
+	render() {
+		const { success } = this.props;
 
-    return (
-      <div class="bueller" data-test="component-input">
-        {!success && (
-          <form action="" className="form-inline">
-            <input
-              className="mb-2 mx-sm-3"
-              data-test="input-box"
-              name=""
-              onClick=""
-              placeholder="Enter Your Guess"
-              type="text"
-              value=""
-            />
-            <button
-              className="btn btn-primary mb-2"
-              data-test="submit-button"
-              type="submit"
-            >
-              Hit Me!
-            </button>
-          </form>
-        )}
-      </div>
-    );
-  }
+		return (
+			<div className="bueller" data-test="component-input">
+				{!success && (
+					<form action="" className="form-inline">
+						<input
+							className="mb-2 mx-sm-3"
+							data-test="input-box"
+							defaultValue=""
+							name=""
+							onClick={() => {}}
+							placeholder="Enter Your Guess"
+							type="text"
+						/>
+						<button
+							className="btn btn-primary mb-2"
+							data-test="submit-button"
+							type="submit"
+						>
+							Hit Me!
+						</button>
+					</form>
+				)}
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = ({ success }) => {
-  return {
-    success,
-  };
+	return {
+		success,
+	};
 };
 
 export default connect(mapStateToProps, { guessWord })(Input);

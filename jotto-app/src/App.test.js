@@ -34,9 +34,11 @@ import { storeFactory } from "../test/testUtils";
  */
 const setup = (state = {}) => {
 	const store = storeFactory(state);
+
 	const wrapper = shallow(<App store={store} />)
 		.dive()
 		.dive();
+
 	return wrapper;
 };
 
@@ -47,9 +49,11 @@ describe("redux properties", () => {
 	it("has access to `success` state", () => {
 		// GIVEN
 		const success = true;
+
 		const wrapper = setup({
 			success,
 		});
+
 		const { success: successProp } = wrapper.instance().props;
 
 		// WHEN
@@ -60,9 +64,11 @@ describe("redux properties", () => {
 	it("has access to `secretWord` state", () => {
 		// GIVEN
 		const secretWord = "party";
+
 		const wrapper = setup({
 			secretWord,
 		});
+
 		const { secretWord: secretWordProp } = wrapper.instance().props;
 
 		// WHEN
@@ -78,9 +84,11 @@ describe("redux properties", () => {
 				letterMatchCount: 3,
 			},
 		];
+
 		const wrapper = setup({
 			guessedWords,
 		});
+
 		const { guessedWords: guessedWordsProp } = wrapper.instance().props;
 
 		// WHEN
@@ -103,6 +111,7 @@ describe("initial App mount", () => {
 	it("`getSecretWord` runs on App mount", () => {
 		// GIVEN
 		const getSecretWordMock = jest.fn();
+
 		const testProps = {
 			getSecretWord: getSecretWordMock,
 			guessedWords: [

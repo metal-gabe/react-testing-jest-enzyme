@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------- */
 // React
 // Packages
-import axios from 'axios';
+import axios from "axios";
 
 // Context
 // Components
@@ -11,7 +11,7 @@ import axios from 'axios';
 // Constants
 
 // Utils / Methods
-import { getLetterMatchCount } from '../helpers';
+import { getLetterMatchCount } from "../helpers";
 
 // Styles
 
@@ -19,9 +19,9 @@ import { getLetterMatchCount } from '../helpers';
 /* START OF CUSTOM ACTION UTILS EXPORTS */
 /* -------------------------------------------------------------------------- */
 export const actionTypes = {
-  CORRECT_GUESS: 'CORRECT_GUESS',
-  GUESS_WORD: 'GUESS_WORD',
-  SET_SECRET_WORD: 'SET_SECRET_WORD',
+	CORRECT_GUESS: "CORRECT_GUESS",
+	GUESS_WORD: "GUESS_WORD",
+	SET_SECRET_WORD: "SET_SECRET_WORD",
 };
 
 /**
@@ -31,38 +31,38 @@ export const actionTypes = {
  * @param {string} guessedWord - The incoming guessed word.
  * @returns {function} - Redux Thunk function.
  */
-export const guessWord = guessedWord => {
-  const { CORRECT_GUESS, GUESS_WORD } = actionTypes;
+export const guessWord = (guessedWord) => {
+	const { CORRECT_GUESS, GUESS_WORD } = actionTypes;
 
-  return function (dispatch, getState) {
-    const secretWord = getState().secretWord;
-    const letterMatchCount = getLetterMatchCount(guessedWord, secretWord);
+	return function (dispatch, getState) {
+		const secretWord = getState().secretWord;
+		const letterMatchCount = getLetterMatchCount(guessedWord, secretWord);
 
-    dispatch({
-      payload: {
-        guessedWord,
-        letterMatchCount,
-      },
-      type: GUESS_WORD,
-    });
+		dispatch({
+			payload: {
+				guessedWord,
+				letterMatchCount,
+			},
+			type: GUESS_WORD,
+		});
 
-    if (guessedWord === secretWord) {
-      dispatch({
-        type: CORRECT_GUESS,
-      });
-    }
-  };
+		if (guessedWord === secretWord) {
+			dispatch({
+				type: CORRECT_GUESS,
+			});
+		}
+	};
 };
 
 export const getSecretWord = () => {
-  const { SET_SECRET_WORD } = actionTypes;
+	const { SET_SECRET_WORD } = actionTypes;
 
-  return dispatch => {
-    return axios.get('http://localhost:3030/').then(response => {
-      dispatch({
-        payload: response.data,
-        type: SET_SECRET_WORD,
-      });
-    });
-  };
+	return (dispatch) => {
+		return axios.get("http://localhost:3030/").then((response) => {
+			dispatch({
+				payload: response.data,
+				type: SET_SECRET_WORD,
+			});
+		});
+	};
 };
