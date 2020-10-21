@@ -21,12 +21,12 @@ import { storeFactory } from "../test/testUtils";
 
 // Styles
 
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 /* SETUP STUFF */
-/* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+/* ========================================================================== */
 /* INITIAL SETUP STEPS */
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 /**
  * @function setup
  * @param {object} state - State for this setup.
@@ -42,9 +42,9 @@ const setup = (state = {}) => {
 	return wrapper;
 };
 
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 /* START OF UNIT TESTS FOR MAIN APP COMPONENT */
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 describe("redux properties", () => {
 	it("has access to `success` state", () => {
 		// GIVEN
@@ -126,9 +126,9 @@ describe("initial App mount", () => {
 		const wrapper = shallow(<UnconnectedApp {...testProps} />);
 
 		// WHEN
-		// run the lifecycle method
+		// we run the lifecycle method
 		wrapper.instance().componentDidMount();
-		// check to see if our mock ran
+		// and then check to see if our mock ran
 		const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
 
 		// THEN

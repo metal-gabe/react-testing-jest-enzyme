@@ -2,10 +2,10 @@
 /* ALL IMPORTS */
 /* -------------------------------------------------------------------------- */
 // React
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore } from "redux";
 
 // Packages
-import checkPropTypes from 'check-prop-types';
+import checkPropTypes from "check-prop-types";
 
 // Context
 
@@ -14,8 +14,8 @@ import checkPropTypes from 'check-prop-types';
 // Constants
 
 // Utils / Methods
-import { middleware } from '../src/configureStore';
-import rootReducer from '../src/reducers';
+import { middleware } from "../src/configureStore";
+import rootReducer from "../src/reducers";
 
 // Styles
 
@@ -29,9 +29,11 @@ import rootReducer from '../src/reducers';
  * @function storeFactory
  * @returns {Store} - Redux store.
  */
-export const storeFactory = initialState => {
-  const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
-  return createStoreWithMiddleware(rootReducer, initialState);
+export const storeFactory = (initialState) => {
+	const createStoreWithMiddleware = applyMiddleware(...middleware)(
+		createStore
+	);
+	return createStoreWithMiddleware(rootReducer, initialState);
 };
 
 /**
@@ -41,16 +43,16 @@ export const storeFactory = initialState => {
  * @returns {ShallowWrapper}
  */
 export const findByTestAttr = (wrapper, value) => {
-  return wrapper.find(`[data-test="${value}"]`);
+	return wrapper.find(`[data-test="${value}"]`);
 };
 
 export const checkProps = (component, conformingProps) => {
-  const propError = checkPropTypes(
-    component.propTypes,
-    conformingProps,
-    'prop',
-    component.name,
-  );
+	const propError = checkPropTypes(
+		component.propTypes,
+		conformingProps,
+		"prop",
+		component.name
+	);
 
-  expect(propError).toBeUndefined();
+	expect(propError).toBeUndefined();
 };

@@ -1,6 +1,6 @@
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 /* ALL IMPORTS */
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 // React
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -16,12 +16,12 @@ import { guessWord } from "./actions";
 
 // Styles
 
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 /* START OF CUSTOM INPUT COMPONENT */
-/* -------------------------------------------------------------------------- */
-class Input extends Component {
+/* ========================================================================== */
+export class UnconnectedInput extends Component {
 	render() {
-		const { success } = this.props;
+		const { guessWord, success } = this.props;
 
 		return (
 			<div className="bueller" data-test="component-input">
@@ -31,6 +31,7 @@ class Input extends Component {
 							className="mb-2 mx-sm-3"
 							data-test="input-box"
 							defaultValue=""
+							id="word-guess"
 							name=""
 							onClick={() => {}}
 							placeholder="Enter Your Guess"
@@ -39,6 +40,7 @@ class Input extends Component {
 						<button
 							className="btn btn-primary mb-2"
 							data-test="submit-button"
+							onClick={() => guessWord('train')}
 							type="submit"
 						>
 							Hit Me!
@@ -56,4 +58,4 @@ const mapStateToProps = ({ success }) => {
 	};
 };
 
-export default connect(mapStateToProps, { guessWord })(Input);
+export default connect(mapStateToProps, { guessWord })(UnconnectedInput);
