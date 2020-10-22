@@ -20,8 +20,29 @@ import { guessWord } from "./actions";
 /* START OF CUSTOM INPUT COMPONENT */
 /* ========================================================================== */
 export class UnconnectedInput extends Component {
+	/**
+	 * @method constructor
+	 * @param {object} props - Component props
+	 * @returns {undefined}
+	 */
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			currentGuess: null,
+		};
+
+		[
+			// prettier-ignore
+			'submitGuessedWord',
+		].forEach((m) => {
+			this[m] = this[m].bind(this);
+		});
+	}
+
 	render() {
 		const { guessWord, success } = this.props;
+		const { currentGuess } = this.state;
 
 		return (
 			<div className="bueller" data-test="component-input">
@@ -33,14 +54,20 @@ export class UnconnectedInput extends Component {
 							defaultValue=""
 							id="word-guess"
 							name=""
+							onChange={(e) => {
+								this.setState({
+									currentGuess: e.target.value,
+								});
+							}}
 							onClick={() => {}}
 							placeholder="Enter Your Guess"
 							type="text"
+							value={currentGuess}
 						/>
 						<button
 							className="btn btn-primary mb-2"
 							data-test="submit-button"
-							onClick={() => guessWord('train')}
+							onClick={(e) => this.submitGuessedWord(e)}
 							type="submit"
 						>
 							Hit Me!
@@ -49,6 +76,16 @@ export class UnconnectedInput extends Component {
 				)}
 			</div>
 		);
+	}
+
+	submitGuessedWord(event) {
+		event.preventDefault();
+		const { guessWord } = this.props;
+		const { currentGuess } = this.state;
+
+		if (currentGuess && currentGuess.length) {
+			guessWord(currentGuess);
+		}
 	}
 }
 

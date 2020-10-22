@@ -1,6 +1,6 @@
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 /* ALL IMPORTS */
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 // React
 import React from "react";
 import { shallow } from "enzyme";
@@ -19,9 +19,9 @@ import { findByTestAttr, storeFactory } from "../test/testUtils";
 
 // Styles
 
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 /* INITIAL SETUP STEPS */
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 /**
  * Factory function to create a ShallowWrapper for the GuessedWords component
  * @function setup
@@ -36,9 +36,9 @@ const setup = (initialState = {}) => {
 	return wrapper;
 };
 
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 /* START OF UNIT TESTS FOR THE INPUT COMPONENT */
-/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
 describe("render", () => {
 	describe("word has not been guessed", () => {
 		let wrapper;
@@ -143,22 +143,43 @@ describe("redux props", () => {
 });
 
 describe("`guessWord` action creator call", () => {
-	it("calls `guessWord` when button is clicked", () => {
-		// GIVEN
-		const guessWordMock = jest.fn();
+	let guessWordMock;
+	let wrapper;
+	const guessedWord = "train";
+
+	beforeEach(() => {
+		guessWordMock = jest.fn();
 
 		const testProps = {
 			guessWord: guessWordMock,
 		};
 
-		const wrapper = shallow(<UnconnectedInput {...testProps} />);
+		wrapper = shallow(<UnconnectedInput {...testProps} />);
 		const submitButton = findByTestAttr(wrapper, "submit-button");
 
+		wrapper.setState({
+			currentGuess: guessedWord,
+		});
+
+		submitButton.simulate("click", {
+			preventDefault() {},
+		});
+	});
+
+	it("calls `guessWord` once", () => {
 		// WHEN
-		submitButton.simulate("click");
 		const guessWordCallCount = guessWordMock.mock.calls.length;
 
 		// THEN
 		expect(guessWordCallCount).toBe(1);
+	});
+
+	it("calls `guessWord` with input value as argument", () => {
+		// GIVEN
+		const guessWordArg = guessWordMock.mock.calls[0][0];
+
+		// WHEN
+		// THEN
+		expect(guessWordArg).toBe(guessedWord);
 	});
 });
