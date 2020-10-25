@@ -44,13 +44,14 @@ export class UnconnectedApp extends Component {
 	}
 
 	render() {
-		const { guessedWords, success } = this.props;
+		const { guessedWords, secretWord, success } = this.props;
 
 		return (
 			<div className="container">
 				<header className="App-header">
 					<h1 className="App-title">Jotto Game</h1>
 					<img src={logo} className="App-logo" alt="logo" />
+					<p>The secret word is "{secretWord}".</p>
 					<Congrats success={success} />
 					<Input />
 					<GuessedWords guessedWords={guessedWords} />

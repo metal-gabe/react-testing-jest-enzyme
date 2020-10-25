@@ -29,7 +29,7 @@ export class UnconnectedInput extends Component {
 		super(props);
 
 		this.state = {
-			currentGuess: null,
+			currentGuess: "",
 		};
 
 		[
@@ -41,7 +41,7 @@ export class UnconnectedInput extends Component {
 	}
 
 	render() {
-		const { guessWord, success } = this.props;
+		const { success } = this.props;
 		const { currentGuess } = this.state;
 
 		return (
@@ -51,7 +51,6 @@ export class UnconnectedInput extends Component {
 						<input
 							className="mb-2 mx-sm-3"
 							data-test="input-box"
-							defaultValue=""
 							id="word-guess"
 							name=""
 							onChange={(e) => {
@@ -82,14 +81,20 @@ export class UnconnectedInput extends Component {
 		event.preventDefault();
 		const { guessWord } = this.props;
 		const { currentGuess } = this.state;
+		const currentGuessIsValid =
+			currentGuess && currentGuess.length > 0 && currentGuess.length < 6;
 
-		if (currentGuess && currentGuess.length) {
-			guessWord(currentGuess);
-
-			this.setState({
-				currentGuess: '',
-			});
+		if (!currentGuessIsValid) {
+			window.alert("Please enter a guess that is 1-5 characters long.");
 		}
+
+		if (currentGuessIsValid) {
+			guessWord(currentGuess);
+		}
+
+		this.setState({
+			currentGuess: "",
+		});
 	}
 }
 

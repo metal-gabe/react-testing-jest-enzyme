@@ -22,27 +22,29 @@ const GuessedWords = (props) => {
 
 	return (
 		<div data-test="component-guessed-words">
-			{!guessedWords.length && (
+			{Boolean(!guessedWords.length) && (
 				<span data-test="guess-instructions">
 					Try to guess the secret word!
 				</span>
 			)}
-			{guessedWords.length && (
+			{Boolean(guessedWords.length) && (
 				<div data-test="guessed-words">
-					<h3>Guessed Words</h3>
+					<h3>Guessed Words (total: {guessedWords.length})</h3>
 					<table className="table table-sm">
 						<thead className="thead-light">
 							<tr>
+								<th>#</th>
 								<th>Guess</th>
 								<th>Matching Letters</th>
 							</tr>
 						</thead>
 						<tbody>
-							{guessedWords.map((word) => {
+							{guessedWords.map((word, idx) => {
 								const { guessedWord, letterMatchCount } = word;
 
 								return (
 									<tr data-test="guessed-word" key={guessedWord}>
+										<td>{idx+1}</td>
 										<td>{guessedWord}</td>
 										<td>{letterMatchCount}</td>
 									</tr>
