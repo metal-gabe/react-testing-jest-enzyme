@@ -6,25 +6,19 @@ import React from "react";
 
 // Packages
 // Context
-
 // Components
-import "./App.css";
-import Input from "./Input";
-
 // Assets
 // Constants
 // Utils / Methods
 // Styles
 
 /* ========================================================================== */
-// MAIN APP COMPONENT DEFINITION AND EXPORT
+// DEFINITION AND EXPORT OF INPUT COMPONENT
 /* ========================================================================== */
-const App = function () {
+const Input = function () {
 	return (
-		<div data-test="component-app">
-			<Input />
-		</div>
+		<div data-test="component-input">I am the `Input`, coo-coo-ka-choo!</div>
 	);
 };
 
-export default App;
+export default Input;
