@@ -16,7 +16,7 @@ import Input from "./Input";
 // Constants
 
 // Utils / Methods
-import { findByTestAttr } from "./../test/testUtils";
+import { checkProps, findByTestAttr } from "./../test/testUtils";
 
 // Styles
 
@@ -40,3 +40,31 @@ it("should render the `Input` component", () => {
 	// THEN
 	expect(component.length).toBe(1);
 });
+
+it("should not throw an error with expected props", () => {
+	// GIVEN
+	const wrapper = setup({
+		secretWord: "bueller",
+	});
+
+	// WHEN
+	// THEN
+	checkProps(wrapper, {
+		secretWord: "bueller",
+	});
+});
+
+// it("should throw an error with unexpected props", () => {
+// 	// GIVEN
+// 	const wrapper = setup({
+// 		secretWord: ["bueller"],
+// 	});
+
+// 	// WHEN
+// 	const stuff = checkProps(wrapper, {
+// 		secretWord: "bueller",
+// 	});
+
+// 	// THEN
+// 	expect(stuff).toBeTruthy();
+// });
