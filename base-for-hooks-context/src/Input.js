@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 // Styles
 
 /* ========================================================================== */
-// DEFINITION AND EXPORT OF INPUT COMPONENT
+// DEFINITION OF INPUT COMPONENT
 /* ========================================================================== */
 const Input = function ({ secretWord }) {
 	return (
@@ -24,7 +24,7 @@ const Input = function ({ secretWord }) {
 };
 
 /* ========================================================================== */
-/* PROP TYPES DECLARATIONS */
+/* PROP TYPES DECLARATIONS & DEFAULT EXPORT */
 /* ========================================================================== */
 Input.defaultProps = {
 	secretWord: "",

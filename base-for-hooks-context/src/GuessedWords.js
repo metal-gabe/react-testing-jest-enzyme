@@ -1,6 +1,22 @@
+/* ========================================================================== */
+// ALL REQUIRED IMPORTS
+/* ========================================================================== */
+// React
 import React from "react";
+
+// Packages
 import PropTypes from "prop-types";
 
+// Context
+// Components
+// Assets
+// Constants
+// Utils / Methods
+// Styles
+
+/* ========================================================================== */
+// DEFINITION OF GUESSED WORDS COMPONENT
+/* ========================================================================== */
 const GuessedWords = (props) => {
 	let contents;
 	if (props.guessedWords.length === 0) {
@@ -34,6 +50,9 @@ const GuessedWords = (props) => {
 	return <div data-test="component-guessed-words">{contents}</div>;
 };
 
+/* ========================================================================== */
+// PROP TYPES DECLARATIONS & DEFAULT EXPORT
+/* ========================================================================== */
 GuessedWords.propTypes = {
 	guessedWords: PropTypes.arrayOf(
 		PropTypes.shape({

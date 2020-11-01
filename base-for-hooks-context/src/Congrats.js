@@ -1,6 +1,22 @@
+/* ========================================================================== */
+// ALL REQUIRED IMPORTS
+/* ========================================================================== */
+// React
 import React from "react";
+
+// Packages
 import PropTypes from "prop-types";
 
+// Context
+// Components
+// Assets
+// Constants
+// Utils / Methods
+// Styles
+
+/* ========================================================================== */
+// DEFINITION OF CONGRATS COMPONENT
+/* ========================================================================== */
 /**
  * Functional react component for congratulatory message.
  * @function
@@ -21,6 +37,9 @@ const Congrats = (props) => {
 	}
 };
 
+/* ========================================================================== */
+/* PROP TYPES DECLARATIONS & DEFAULT EXPORT */
+/* ========================================================================== */
 Congrats.propTypes = {
 	success: PropTypes.bool.isRequired,
 };
