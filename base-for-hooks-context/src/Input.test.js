@@ -42,14 +42,8 @@ it("should render the `Input` component", () => {
 });
 
 it("should not throw an error with expected props", () => {
-	// GIVEN
-	const wrapper = setup({
-		secretWord: "bueller",
-	});
-
-	// WHEN
 	// THEN
-	checkProps(wrapper, {
+	checkProps(Input, {
 		secretWord: "bueller",
 	});
 });

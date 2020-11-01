@@ -23,8 +23,6 @@ const Input = function ({ secretWord }) {
 	);
 };
 
-export default Input;
-
 /* ========================================================================== */
 /* PROP TYPES DECLARATIONS */
 /* ========================================================================== */
@@ -35,3 +33,5 @@ Input.defaultProps = {
 Input.propTypes = {
 	secretWord: PropTypes.string.isRequired,
 };
+
+export default Input;
