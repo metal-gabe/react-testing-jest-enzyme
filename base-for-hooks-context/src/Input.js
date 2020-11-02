@@ -5,7 +5,7 @@
 import React from "react";
 
 // Packages
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 // Context
 // Components
@@ -18,8 +18,30 @@ import PropTypes from 'prop-types';
 // DEFINITION OF INPUT COMPONENT
 /* ========================================================================== */
 const Input = function ({ secretWord }) {
+	const [currentGuess, setCurrentState] = React.useState("");
+
 	return (
-		<div data-test="component-input">I am the `Input`, coo-coo-ka-choo!</div>
+		<div data-test="component-input">
+			<form action="" className="form-inline" method="get" name="">
+				<input
+					className="mb-2 mx-sm-3"
+					data-test="input-box"
+					name=""
+					onClick=""
+					placeholder="Bueller?"
+					type="text"
+					value=""
+				/>
+				<button
+					className=""
+					data-test="submit-button"
+					onClick={(event) => event.preventDefault()}
+					type="submit"
+				>
+					Submit
+				</button>
+			</form>
+		</div>
 	);
 };
 
