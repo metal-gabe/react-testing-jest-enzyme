@@ -30,35 +30,59 @@ const setup = (props = {}) => {
 /* ========================================================================== */
 // START OF ALL UNIT TESTS FOR INPUT COMPONENT
 /* ========================================================================== */
-it("should render the `Input` component", () => {
-	// GIVEN
-	const wrapper = setup();
+describe("state controlled input field", () => {
+	it("should render the `Input` component", () => {
+		// GIVEN
+		const wrapper = setup();
 
-	// WHEN
-	const component = findByTestAttr(wrapper, "component-input");
+		// WHEN
+		const component = findByTestAttr(wrapper, "component-input");
 
-	// THEN
-	expect(component.length).toBe(1);
-});
+		// THEN
+		expect(component.length).toBe(1);
+	});
 
-it("should not throw an error with expected props", () => {
-	// THEN
-	checkProps(Input, {
-		secretWord: "bueller",
+	it("should not throw an error with expected props", () => {
+		// THEN
+		checkProps(Input, {
+			secretWord: "bueller",
+		});
+	});
+
+	// it("should throw an error with unexpected props", () => {
+	// 	// GIVEN
+	// 	const wrapper = setup({
+	// 		secretWord: ["bueller"],
+	// 	});
+
+	// 	// WHEN
+	// 	const stuff = checkProps(wrapper, {
+	// 		secretWord: "bueller",
+	// 	});
+
+	// 	// THEN
+	// 	expect(stuff).toBeTruthy();
+	// });
+
+	it("should update state with the value from the input box upon change", () => {
+		// GIVEN
+		const wrapper = setup();
+		const mockSetCurrentGuess = jest.fn();
+
+		React.useState = jest.fn(() => {
+			return ["", mockSetCurrentGuess];
+		});
+
+		// WHEN
+		const inputBox = findByTestAttr(wrapper, "input-box");
+		const mockEvent = {
+			target: {
+				value: "train",
+			},
+		};
+		inputBox.simulate("change", mockEvent);
+
+		// THEN
+		expect(mockSetCurrentGuess).toHaveBeenCalledWith("train");
 	});
 });
-
-// it("should throw an error with unexpected props", () => {
-// 	// GIVEN
-// 	const wrapper = setup({
-// 		secretWord: ["bueller"],
-// 	});
-
-// 	// WHEN
-// 	const stuff = checkProps(wrapper, {
-// 		secretWord: "bueller",
-// 	});
-
-// 	// THEN
-// 	expect(stuff).toBeTruthy();
-// });
