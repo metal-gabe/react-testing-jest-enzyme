@@ -37,7 +37,12 @@ const Input = function ({ secretWord }) {
 				<button
 					className=""
 					data-test="submit-button"
-					onClick={(event) => event.preventDefault()}
+					onClick={(event) => {
+						event.preventDefault();
+						// TODO **[G]** :: update `guessedWords`
+						// TODO **[G]** :: check against `secretWord` and update "success" if needed
+						setCurrentGuess("")
+					}}
 					type="submit"
 				>
 					Submit
