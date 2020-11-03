@@ -18,7 +18,7 @@ import PropTypes from "prop-types";
 // DEFINITION OF INPUT COMPONENT
 /* ========================================================================== */
 const Input = function ({ secretWord }) {
-	const [currentGuess, setCurrentState] = React.useState("");
+	const [currentGuess, setCurrentGuess] = React.useState("");
 
 	return (
 		<div data-test="component-input">
@@ -27,10 +27,12 @@ const Input = function ({ secretWord }) {
 					className="mb-2 mx-sm-3"
 					data-test="input-box"
 					name=""
-					onClick=""
+					onChange={(event) => {
+						setCurrentGuess(event.target.value);
+					}}
 					placeholder="Bueller?"
 					type="text"
-					value=""
+					value={currentGuess}
 				/>
 				<button
 					className=""

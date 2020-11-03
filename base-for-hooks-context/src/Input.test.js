@@ -66,12 +66,13 @@ describe("state controlled input field", () => {
 
 	it("should update state with the value from the input box upon change", () => {
 		// GIVEN
-		const wrapper = setup();
 		const mockSetCurrentGuess = jest.fn();
 
 		React.useState = jest.fn(() => {
 			return ["", mockSetCurrentGuess];
 		});
+
+		const wrapper = setup();
 
 		// WHEN
 		const inputBox = findByTestAttr(wrapper, "input-box");
