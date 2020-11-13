@@ -5,7 +5,7 @@
 import React from "react";
 
 // Packages
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 
 // Context
 
@@ -16,19 +16,24 @@ import App from "./App";
 // Constants
 
 // Utils / Methods
+import hookActions from "./actions/hookActions";
 import { findByTestAttr } from "../test/testUtils";
 
 // Styles
 
 /* ========================================================================== */
-// SETUP UTIL AND HELPER METHODS
+// SETUP, UTILS, AND HELPER METHODS
 /* ========================================================================== */
+const mockGetSecretWord = jest.fn();
+
 /**
  * Setup function for App component.
- * @returns {ShallowWrapper}
+ * @returns {ReactWrapper}
  */
 const setup = (props = {}) => {
-	return shallow(<App {...props} />);
+	mockGetSecretWord.mockClear();
+	hookActions.getSecretWord = mockGetSecretWord;
+	return mount(<App {...props} />);
 };
 
 /* ========================================================================== */
@@ -43,4 +48,15 @@ it("App renders without error", () => {
 
 	// THEN
 	expect(component.length).toBe(1);
+});
+
+describe("`getSecretWord` Calls", () => {
+	it("should call `getSecretWord` on `App` mount", () => {
+		// GIVEN
+		// WHEN
+		setup();
+
+		// THEN
+		expect(mockGetSecretWord).toHaveBeenCalled();
+	});
 });
