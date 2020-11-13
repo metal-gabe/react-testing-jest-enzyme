@@ -34,7 +34,7 @@ describe("Moxios Tests", () => {
 
 		// WHEN
 		moxios.wait(() => {
-			const request = moxios.request.mostRecent();
+			const request = moxios.requests.mostRecent();
 
 			request.respondWith({
 				response: secretWord,
