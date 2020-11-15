@@ -73,7 +73,7 @@ const App = function () {
 	}
 
 	return (
-		<div className="app" data-test="component-app">
+		<div className="container app" data-test="component-app">
 			<p>Lesson: Base for Hooks Context</p>
 			<Input secretWord={secretWord} />
 		</div>
