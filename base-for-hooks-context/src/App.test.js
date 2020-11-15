@@ -52,11 +52,22 @@ it("App renders without error", () => {
 
 describe("`getSecretWord` Calls", () => {
 	it("should call `getSecretWord` on `App` mount", () => {
-		// GIVEN
 		// WHEN
 		setup();
 
 		// THEN
 		expect(mockGetSecretWord).toHaveBeenCalled();
+	});
+
+	it("should not update `secretWord` on `App` update", () => {
+		// GIVEN
+		const wrapper = setup();
+		mockGetSecretWord.mockClear();
+
+		// WHEN
+		wrapper.setProps();
+
+		// THEN
+		expect(mockGetSecretWord).not.toHaveBeenCalled();
 	});
 });
