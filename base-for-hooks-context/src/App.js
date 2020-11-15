@@ -61,6 +61,17 @@ const App = function () {
 		hookActions.getSecretWord(setSecretWord);
 	}, []);
 
+	if (!secretWord) {
+		return (
+			<div className="container" data-test="spinner">
+				<div className="spinner-border" role="status">
+					<span className="sr-only">Loading...</span>
+				</div>
+				<p>Loading the secret word...</p>
+			</div>
+		);
+	}
+
 	return (
 		<div className="app" data-test="component-app">
 			<p>Lesson: Base for Hooks Context</p>
