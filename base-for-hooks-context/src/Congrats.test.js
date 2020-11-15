@@ -37,7 +37,7 @@ const setup = (props = {}) => {
 };
 
 /* ========================================================================== */
-// START OF ALL UNIT TESTS FOR CONGRATS COMPONENT
+// START OF ALL UNIT TESTS FOR `CONGRATS` COMPONENT
 /* ========================================================================== */
 it("renders without error", () => {
 	const wrapper = setup();

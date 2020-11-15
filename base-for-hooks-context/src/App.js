@@ -44,12 +44,17 @@ const reducer = (state, action) => {
 // MAIN `APP` COMPONENT: DEFINITION & EXPORT
 /* ========================================================================== */
 const App = function () {
-	const [state, dispatch] = React.useReducer(reducer, { secretWord: null });
+	const [state, dispatch] = React.useReducer(reducer, {
+		secretWord: null,
+	});
+
+	const SET_SECRET_WORD = "setSecretWord";
+	const { secretWord } = state;
 
 	const setSecretWord = (secretWord) =>
 		dispatch({
 			payload: secretWord,
-			type: "setSecretWord",
+			type: SET_SECRET_WORD,
 		});
 
 	React.useEffect(() => {
@@ -59,7 +64,7 @@ const App = function () {
 	return (
 		<div className="app" data-test="component-app">
 			<p>Lesson: Base for Hooks Context</p>
-			<Input />
+			<Input secretWord={secretWord} />
 		</div>
 	);
 };

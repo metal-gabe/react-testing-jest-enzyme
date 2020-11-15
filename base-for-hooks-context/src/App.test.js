@@ -28,18 +28,30 @@ const mockGetSecretWord = jest.fn();
 
 /**
  * Setup function for App component.
+ * @param {string} secretWord - desired `secretWord` state value for the tests
  * @returns {ReactWrapper}
  */
-const setup = (props = {}) => {
+const setup = (props = { secretWord: "party" }) => {
+	const { secretWord } = props;
 	mockGetSecretWord.mockClear();
 	hookActions.getSecretWord = mockGetSecretWord;
+
+	const mockUseReducer = jest.fn().mockReturnValue([
+		{
+			secretWord,
+		},
+		jest.fn(),
+	]);
+
+	React.useReducer = mockUseReducer;
+
 	return mount(<App {...props} />);
 };
 
 /* ========================================================================== */
-// START OF ALL UNIT TESTS FOR MAIN APP COMPONENT
+// START OF ALL UNIT TESTS FOR MAIN `APP` COMPONENT
 /* ========================================================================== */
-it("App renders without error", () => {
+it("renders the `App` without error", () => {
 	// GIVEN
 	const wrapper = setup();
 
@@ -69,5 +81,53 @@ describe("`getSecretWord` Calls", () => {
 
 		// THEN
 		expect(mockGetSecretWord).not.toHaveBeenCalled();
+	});
+});
+
+describe("when `secretWord` is NOT `null`", () => {
+	let wrapper;
+
+	beforeEach(() => {
+		wrapper = setup({ secretWord: "party" });
+	});
+
+	it("should render the `App` when `secretWord` is NOT `null`", () => {
+		// GIVEN
+		const appComponent = findByTestAttr(wrapper, "component-app");
+
+		// THEN
+		expect(appComponent.exists()).toBe(true);
+	});
+
+	it("should not render the loading spinner when `secretWord` is NOT `null`", () => {
+		// GIVEN
+		const spinnerComponent = findByTestAttr(wrapper, "spinner");
+
+		// THEN
+		expect(spinnerComponent.exists()).toBe(false);
+	});
+});
+
+describe("when `secretWord` is `null`", () => {
+	let wrapper;
+
+	beforeEach(() => {
+		wrapper = setup({ secretWord: null });
+	});
+
+	it("should NOT render the `App` when `secretWord` is `null`", () => {
+		// GIVEN
+		const appComponent = findByTestAttr(wrapper, "component-app");
+
+		// THEN
+		expect(appComponent.exists()).toBe(false);
+	});
+
+	it("should render the loading spinner when `secretWord` is `null`", () => {
+		// GIVEN
+		const spinnerComponent = findByTestAttr(wrapper, "spinner");
+
+		// THEN
+		expect(spinnerComponent.exists()).toBe(true);
 	});
 });

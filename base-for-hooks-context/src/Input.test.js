@@ -28,7 +28,7 @@ const setup = (props = {}) => {
 };
 
 /* ========================================================================== */
-// START OF ALL UNIT TESTS FOR INPUT COMPONENT
+// START OF ALL UNIT TESTS FOR `INPUT` COMPONENT
 /* ========================================================================== */
 describe("state controlled input field", () => {
 	const mockSetCurrentGuess = jest.fn();
