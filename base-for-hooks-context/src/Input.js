@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 // Styles
 
 /* ========================================================================== */
-// DEFINITION OF INPUT COMPONENT
+// `INPUT` COMPONENT: DEFINITION & EXPORT
 /* ========================================================================== */
 const Input = function ({ secretWord }) {
 	const [currentGuess, setCurrentGuess] = React.useState("");
