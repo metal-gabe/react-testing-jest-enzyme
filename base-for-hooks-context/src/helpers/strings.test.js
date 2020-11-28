@@ -1,6 +1,26 @@
+/* ========================================================================== */
+// ALL REQUIRED IMPORTS
+/* ========================================================================== */
+// React
+// Packages
+// Context
+// Components
+// Assets
+// Constants
+
+// Utils / Methods
 import stringsModule from "./strings";
+
+// Styles
+
+/* ========================================================================== */
+// INTERNAL HELPERS, VARS & SET UP
+/* ========================================================================== */
 const { getStringByLanguage } = stringsModule;
 
+/* ========================================================================== */
+// START OF MAIN TESTS FOR LANGUAGE PICKER HELPER METHODS
+/* ========================================================================== */
 describe("Testing `stringsModule` language switching", () => {
 	const fakeStrings = {
 		emo: {

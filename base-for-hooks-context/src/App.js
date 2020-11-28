@@ -20,7 +20,7 @@ import hookActions from "./actions/hookActions";
 // Styles
 
 /* ========================================================================== */
-// INTERNAL HELPER METHODS
+// INTERNAL HELPERS, VARS & SET UP
 /* ========================================================================== */
 /**
  * A reducer to update state; called automatically by `dispatch`
