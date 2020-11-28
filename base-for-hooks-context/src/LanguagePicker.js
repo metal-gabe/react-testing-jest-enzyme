@@ -5,7 +5,7 @@
 import React from "react";
 
 // Packages
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 // Context
 // Components
@@ -18,7 +18,28 @@ import PropTypes from 'prop-types';
 // LANGUAGE PICKER FUNCTIONAL COMPONENT
 /* ========================================================================== */
 const LanguagePicker = function ({ setLanguage }) {
-	return <div data-test="component-language-picker">m</div>;
+	const languages = [
+		{
+			code: "en",
+			symbol: "🇺🇸",
+		},
+		{
+			code: "emo",
+			symbol: "😊",
+		},
+	];
+
+	return (
+		<div data-test="component-language-picker">
+			{languages.map((language) => {
+				return (
+					<span data-test="language-icon" key={language.code}>
+						{language.symbol}
+					</span>
+				);
+			})}
+		</div>
+	);
 };
 
 /* ========================================================================== */

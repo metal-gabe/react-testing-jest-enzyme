@@ -50,7 +50,14 @@ describe("Testing the LanguagePicker component", () => {
 	});
 
 	it("should render non-zero language icons", () => {
-		// GIVEN// WHEN// THEN
+		// GIVEN
+		const wrapper = setup();
+
+		// WHEN
+		const languageIcons = findByTestAttr(wrapper, "language-icon");
+
+		// THEN
+		expect(languageIcons.length).toBeGreaterThan(0);
 	});
 
 	it("should call the `setLanguage` prop upon click", () => {
