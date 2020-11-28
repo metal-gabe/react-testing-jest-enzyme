@@ -1,7 +1,7 @@
 import stringsModule from "./strings";
 const { getStringByLanguage } = stringsModule;
 
-describe("Testing stringsModule language returns", () => {
+describe("Testing `stringsModule` language returns", () => {
 	it("should return the correct `submit` string for English", () => {
 		// GIVEN// WHEN// THEN
 	});
