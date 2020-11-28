@@ -24,6 +24,18 @@ describe("Testing `stringsModule` language switching", () => {
 		"merManPop!": {},
 	};
 
+	let originalWarn;
+	const mockWarn = jest.fn();
+
+	beforeEach(() => {
+		originalWarn = console.warn;
+		console.warn = mockWarn;
+	});
+
+	afterEach(() => {
+		console.warn = originalWarn;
+	});
+
 	it("should return the correct `submit` string for English", () => {
 		// GIVEN
 		const string = getStringByLanguage("en", "submit", fakeStrings);
@@ -31,6 +43,7 @@ describe("Testing `stringsModule` language switching", () => {
 		// WHEN
 		// THEN
 		expect(string).toBe("Submit");
+		expect(mockWarn).not.toHaveBeenCalled();
 	});
 
 	it("should return the correct `submit` string for Emoji", () => {
@@ -40,23 +53,30 @@ describe("Testing `stringsModule` language switching", () => {
 		// WHEN
 		// THEN
 		expect(string).toBe("🚀");
+		expect(mockWarn).not.toHaveBeenCalled();
 	});
 
 	it("should return the English version for the `submit` string if a language doesn't exist", () => {
 		// GIVEN
-		const string = getStringByLanguage('notRealLanguage', 'submit', fakeStrings);
+		const string = getStringByLanguage("notRealLang", "submit", fakeStrings);
 
 		// WHEN
 		// THEN
-		expect(string).toBe('Submit');
+		expect(string).toBe("Submit");
+		expect(mockWarn).toHaveBeenCalledWith(
+			'Could not get the string of ["submit"] for the language of ["notRealLang"]'
+		);
 	});
 
-	it("should return the English version for the `submit` string if the language exists but doesn't contain the `submit` string", () => {
+	it("should return the English version for the `submit` string if the language exists but doesn't contain the `submit` key", () => {
 		// GIVEN
-		const string = getStringByLanguage('merManPop!', 'submit', fakeStrings);
+		const string = getStringByLanguage("merManPop!", "submit", fakeStrings);
 
 		// WHEN
 		// THEN
-		expect(string).toBe('Submit');
+		expect(string).toBe("Submit");
+		expect(mockWarn).toHaveBeenCalledWith(
+			'Could not get the string of ["submit"] for the language of ["merManPop!"]'
+		);
 	});
 });
