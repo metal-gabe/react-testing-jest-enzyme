@@ -23,6 +23,13 @@ const getStringByLanguage = (
 	languageCode,
 	stringKey,
 	strings = languageStrings
-) => {};
+) => {
+	if (!languageStrings[languageCode] || !languageStrings[languageCode][stringKey]) {
+		// default to using the English version of the requested `stringKey`
+		return languageStrings.en[stringKey];
+	}
+
+	return languageStrings[languageCode][stringKey];
+};
 
 export default { getStringByLanguage };

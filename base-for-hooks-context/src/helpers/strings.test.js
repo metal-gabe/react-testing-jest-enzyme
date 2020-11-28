@@ -1,7 +1,7 @@
 import stringsModule from "./strings";
 const { getStringByLanguage } = stringsModule;
 
-describe("Testing `stringsModule` language returns", () => {
+describe("Testing `stringsModule` language switching", () => {
 	const fakeStrings = {
 		emo: {
 			congrats: "🎯🎉",
@@ -26,7 +26,7 @@ describe("Testing `stringsModule` language returns", () => {
 
 	it("should return the correct `submit` string for English", () => {
 		// GIVEN
-		const string = getStringByLanguage("en", "Submit", fakeStrings);
+		const string = getStringByLanguage("en", "submit", fakeStrings);
 
 		// WHEN
 		// THEN
@@ -35,7 +35,7 @@ describe("Testing `stringsModule` language returns", () => {
 
 	it("should return the correct `submit` string for Emoji", () => {
 		// GIVEN
-		const string = getStringByLanguage("emo", "Submit", fakeStrings);
+		const string = getStringByLanguage("emo", "submit", fakeStrings);
 
 		// WHEN
 		// THEN
@@ -44,7 +44,7 @@ describe("Testing `stringsModule` language returns", () => {
 
 	it("should return the English version for the `submit` string if a language doesn't exist", () => {
 		// GIVEN
-		const string = getStringByLanguage('notRealLanguage', 'Submit', fakeStrings);
+		const string = getStringByLanguage('notRealLanguage', 'submit', fakeStrings);
 
 		// WHEN
 		// THEN
@@ -53,7 +53,7 @@ describe("Testing `stringsModule` language returns", () => {
 
 	it("should return the English version for the `submit` string if the language exists but doesn't contain the `submit` string", () => {
 		// GIVEN
-		const string = getStringByLanguage('merManPop!', 'Submit', fakeStrings);
+		const string = getStringByLanguage('merManPop!', 'submit', fakeStrings);
 
 		// WHEN
 		// THEN
