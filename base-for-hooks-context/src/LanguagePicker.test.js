@@ -45,9 +45,8 @@ describe("Testing the LanguagePicker component", () => {
 	});
 
 	it("should not throw a warning with expected props", () => {
-		// GIVEN
-		checkProps(LanguagePicker, { setLanguage: jest.fn() })
-		// WHEN// THEN
+		// GIVEN// WHEN// THEN
+		checkProps(LanguagePicker, { setLanguage: jest.fn() });
 	});
 
 	it("should render non-zero language icons", () => {
