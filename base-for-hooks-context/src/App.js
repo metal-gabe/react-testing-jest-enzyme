@@ -5,11 +5,14 @@
 import React from "react";
 
 // Packages
+
 // Context
+import LanguageContext from "./contexts/languageContext";
 
 // Components
 import "./App.css";
 import Input from "./Input";
+import LanguagePicker from "./LanguagePicker";
 
 // Assets
 // Constants
@@ -34,6 +37,9 @@ const reducer = (state, action) => {
 		case "setSecretWord":
 			return { ...state, secretWord: action.payload };
 			break;
+		case "setLanguage":
+			return { ...state, language: action.payload };
+			break;
 		default:
 			throw new Error(`Invalid action type: ${action.type}`);
 			break;
@@ -41,13 +47,15 @@ const reducer = (state, action) => {
 };
 
 /* ========================================================================== */
-// MAIN `APP` COMPONENT: DEFINITION & EXPORT
+// DEFINING THE `MAIN APP` COMPONENT
 /* ========================================================================== */
 const App = function () {
 	const [state, dispatch] = React.useReducer(reducer, {
+		language: "en",
 		secretWord: null,
 	});
 
+	const SET_LANGUAGE = "setLanguage";
 	const SET_SECRET_WORD = "setSecretWord";
 	const { secretWord } = state;
 
@@ -55,6 +63,12 @@ const App = function () {
 		dispatch({
 			payload: secretWord,
 			type: SET_SECRET_WORD,
+		});
+
+	const setLanguage = (language) =>
+		dispatch({
+			payload: language,
+			type: SET_LANGUAGE,
 		});
 
 	React.useEffect(() => {
@@ -74,10 +88,23 @@ const App = function () {
 
 	return (
 		<div className="container app" data-test="component-app">
-			<p>Lesson: Base for Hooks Context</p>
-			<Input secretWord={secretWord} />
+			<h1>Jotto Bueller?</h1>
+			<LanguageContext.Provider value={state.language}>
+				<p>Lesson: Base for Hooks Context</p>
+				<LanguagePicker setLanguage={setLanguage} />
+				<Input secretWord={secretWord} />
+			</LanguageContext.Provider>
 		</div>
 	);
 };
 
+/* ========================================================================== */
+/* PROP TYPES DECLARATIONS */
+/* ========================================================================== */
+App.defaultProps = {};
+App.propTypes = {};
+
+/* ========================================================================== */
+// ALL REQUIRED EXPORTS
+/* ========================================================================== */
 export default App;

@@ -5,9 +5,10 @@
 import React from "react";
 
 // Packages
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 
 // Context
+import LanguageContext from "./contexts/languageContext";
 
 // Components
 import Congrats from "./Congrats";
@@ -28,36 +29,70 @@ const defaultProps = { success: false };
 /**
  * Factory function to create a ShallowWrapper for the Congrats component.
  * @function setup
- * @param {object} props - Component props specific to this setup.
+ * @param {object} testValues - Context values specific to this setup.
  * @returns {ShallowWrapper}
  */
-const setup = (props = {}) => {
-	const setupProps = { ...defaultProps, ...props };
-	return shallow(<Congrats {...setupProps} />);
+const setup = ({ success = false, language = "en" }) => {
+	// language = language || 'en';
+	// success = success || false;
+
+	return mount(
+		<LanguageContext.Provider value={language}>
+			<Congrats success={success} />
+		</LanguageContext.Provider>
+	);
 };
 
 /* ========================================================================== */
 // START OF ALL UNIT TESTS FOR `CONGRATS` COMPONENT
 /* ========================================================================== */
-it("renders without error", () => {
-	const wrapper = setup();
-	const component = findByTestAttr(wrapper, "component-congrats");
-	expect(component.length).toBe(1);
-});
+describe("Testing the LanguagePicker component", () => {
+	it("should correctly render the congrats string in English", () => {
+		// GIVEN// WHEN// THEN
+	});
 
-it("renders no text when `success` prop is false", () => {
-	const wrapper = setup({ success: false });
-	const component = findByTestAttr(wrapper, "component-congrats");
-	expect(component.text()).toBe("");
-});
+	it("should correctly render the congrats string in Emoji", () => {
+		// GIVEN// WHEN// THEN
+	});
 
-it("renders non-empty congrats message when `success` prop is true", () => {
-	const wrapper = setup({ success: true });
-	const message = findByTestAttr(wrapper, "congrats-message");
-	expect(message.text().length).not.toBe(0);
-});
+	it("should render without error", () => {
+		// GIVEN
+		const wrapper = setup();
 
-it("does not throw warning with expected props", () => {
-	const expectedProps = { success: false };
-	checkProps(Congrats, expectedProps);
+		// WHEN
+		const component = findByTestAttr(wrapper, "component-congrats");
+
+		// THEN
+		expect(component.length).toBe(1);
+	});
+
+	it("shouldn't render any text when the `success` prop is false", () => {
+		// GIVEN
+		const wrapper = setup({ success: false });
+
+		// WHEN
+		const component = findByTestAttr(wrapper, "component-congrats");
+
+		// THEN
+		expect(component.text()).toBe("");
+	});
+
+	it("should render a non-empty congrats message when the `success` prop is true", () => {
+		// GIVEN
+		const wrapper = setup({ success: true });
+
+		// WHEN
+		const message = findByTestAttr(wrapper, "congrats-message");
+
+		// THEN
+		expect(message.text().length).not.toBe(0);
+	});
+
+	it("does not throw a warning when used with the expected props", () => {
+		// WHEN
+		const expectedProps = { success: false };
+
+		// THEN
+		checkProps(Congrats, expectedProps);
+	});
 });

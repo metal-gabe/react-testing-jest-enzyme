@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 // Styles
 
 /* ========================================================================== */
-// `INPUT` COMPONENT: DEFINITION & EXPORT
+// DEFINING THE `INPUT` COMPONENT
 /* ========================================================================== */
 const Input = function ({ secretWord }) {
 	const [currentGuess, setCurrentGuess] = React.useState("");
@@ -53,7 +53,7 @@ const Input = function ({ secretWord }) {
 };
 
 /* ========================================================================== */
-/* PROP TYPES DECLARATIONS & DEFAULT EXPORT */
+/* PROP TYPES DECLARATIONS */
 /* ========================================================================== */
 Input.defaultProps = {
 	secretWord: "",
@@ -63,4 +63,7 @@ Input.propTypes = {
 	secretWord: PropTypes.string.isRequired,
 };
 
+/* ========================================================================== */
+// ALL REQUIRED EXPORTS
+/* ========================================================================== */
 export default Input;

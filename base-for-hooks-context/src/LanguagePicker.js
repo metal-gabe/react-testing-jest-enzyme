@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 // Styles
 
 /* ========================================================================== */
-// LANGUAGE PICKER FUNCTIONAL COMPONENT
+// DEFINING THE `LANGUAGE PICKER` COMPONENT
 /* ========================================================================== */
 const LanguagePicker = function ({ setLanguage }) {
 	const languages = [
@@ -30,7 +30,7 @@ const LanguagePicker = function ({ setLanguage }) {
 	];
 
 	return (
-		<div data-test="component-language-picker">
+		<div className="language-picker-container" data-test="component-language-picker">
 			{languages.map((language) => {
 				return (
 					<span
@@ -49,8 +49,15 @@ const LanguagePicker = function ({ setLanguage }) {
 /* ========================================================================== */
 /* PROP TYPES DECLARATIONS */
 /* ========================================================================== */
+LanguagePicker.defaultProps = {
+	setLanguage: () => {},
+};
+
 LanguagePicker.propTypes = {
 	setLanguage: PropTypes.func.isRequired,
 };
 
+/* ========================================================================== */
+// ALL REQUIRED EXPORTS
+/* ========================================================================== */
 export default LanguagePicker;
