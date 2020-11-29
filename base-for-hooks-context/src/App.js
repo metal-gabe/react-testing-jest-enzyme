@@ -36,13 +36,10 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case "setSecretWord":
 			return { ...state, secretWord: action.payload };
-			break;
 		case "setLanguage":
 			return { ...state, language: action.payload };
-			break;
 		default:
 			throw new Error(`Invalid action type: ${action.type}`);
-			break;
 	}
 };
 
