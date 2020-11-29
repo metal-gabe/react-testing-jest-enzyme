@@ -61,6 +61,15 @@ describe("Testing the LanguagePicker component", () => {
 	});
 
 	it("should call the `setLanguage` prop upon click", () => {
-		// GIVEN// WHEN// THEN
+		// GIVEN
+		const wrapper = setup();
+
+		// WHEN
+		const languageIcons = findByTestAttr(wrapper, "language-icon");
+		const firstIcon = languageIcons.first();
+		firstIcon.simulate("click");
+
+		// THEN
+		expect(mockSetLanguage).toHaveBeenCalled();
 	});
 });

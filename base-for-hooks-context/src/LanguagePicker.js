@@ -33,7 +33,11 @@ const LanguagePicker = function ({ setLanguage }) {
 		<div data-test="component-language-picker">
 			{languages.map((language) => {
 				return (
-					<span data-test="language-icon" key={language.code}>
+					<span
+						data-test="language-icon"
+						key={language.code}
+						onClick={() => setLanguage(language.code)}
+					>
 						{language.symbol}
 					</span>
 				);
