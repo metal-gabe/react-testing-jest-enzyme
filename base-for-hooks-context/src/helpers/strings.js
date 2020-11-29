@@ -23,7 +23,7 @@ const languageStrings = {
 };
 
 /* ========================================================================== */
-// MAIN METHODS TO BE EXPORTED
+// DEFINING THE `STRINGS MODULE` UTILS
 /* ========================================================================== */
 const getStringByLanguage = (
 	languageCode,
@@ -45,4 +45,7 @@ const getStringByLanguage = (
 	return languageStrings[languageCode][stringKey];
 };
 
+/* ========================================================================== */
+// ALL REQUIRED EXPORTS
+/* ========================================================================== */
 export default { getStringByLanguage };

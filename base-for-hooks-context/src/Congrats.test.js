@@ -32,7 +32,7 @@ const defaultProps = { success: false };
  * @param {object} testValues - Context values specific to this setup.
  * @returns {ShallowWrapper}
  */
-const setup = ({ success = false, language = "en" }) => {
+const setup = ({ language = "en", success = false }) => {
 	// language = language || 'en';
 	// success = success || false;
 
@@ -48,16 +48,24 @@ const setup = ({ success = false, language = "en" }) => {
 /* ========================================================================== */
 describe("Testing the LanguagePicker component", () => {
 	it("should correctly render the congrats string in English", () => {
-		// GIVEN// WHEN// THEN
+		// GIVEN
+		const wrapper = setup({ success: true });
+
+		// THEN
+		expect(wrapper.text()).toBe("Congratulations! You guessed the word!");
 	});
 
 	it("should correctly render the congrats string in Emoji", () => {
-		// GIVEN// WHEN// THEN
+		// GIVEN
+		const wrapper = setup({ language: 'emo', success: true });
+
+		// THEN
+		expect(wrapper.text()).toBe("🎯🎉");
 	});
 
 	it("should render without error", () => {
 		// GIVEN
-		const wrapper = setup();
+		const wrapper = setup({});
 
 		// WHEN
 		const component = findByTestAttr(wrapper, "component-congrats");
