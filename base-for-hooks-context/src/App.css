@@ -15,3 +15,7 @@ body {
 	display: flex;
 	justify-content: space-evenly;
 }
+
+.language-icon {
+	cursor: pointer;
+}

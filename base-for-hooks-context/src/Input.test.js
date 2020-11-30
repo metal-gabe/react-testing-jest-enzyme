@@ -79,6 +79,7 @@ describe("State Controlled `Input` Field", () => {
 					value: "train",
 				},
 			};
+
 			inputBox.simulate("change", mockEvent);
 
 			// THEN
