@@ -5,9 +5,10 @@
 import React from "react";
 
 // Packages
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 
 // Context
+import LanguageContext from "./contexts/languageContext";
 
 // Components
 import Input from "./Input";
@@ -23,14 +24,23 @@ import { checkProps, findByTestAttr } from "./../test/testUtils";
 /* ========================================================================== */
 // SETUP UTIL AND HELPER METHODS
 /* ========================================================================== */
-const setup = (props = {}) => {
-	return shallow(<Input {...props} />);
+/**
+ * Create ReactWrapper for Input component for testing
+ * @param {object} testValues - Context and props values for this specific test.
+ * @returns {ReactWrapper} - Wrapper for Input component and providers.
+ */
+const setup = ({ language = "en", secretWord = "party" }) => {
+	return mount(
+		<LanguageContext.Provider value={language}>
+			<Input secretWord={secretWord} />
+		</LanguageContext.Provider>
+	);
 };
 
 /* ========================================================================== */
 // START OF ALL UNIT TESTS FOR `INPUT` COMPONENT
 /* ========================================================================== */
-describe("state controlled input field", () => {
+describe("State Controlled `Input` Field", () => {
 	const mockSetCurrentGuess = jest.fn();
 	let wrapper;
 
@@ -42,59 +52,70 @@ describe("state controlled input field", () => {
 			return ["", mockSetCurrentGuess];
 		});
 
-		wrapper = setup();
+		wrapper = setup({});
 	});
 
-	it("should render the `Input` component", () => {
-		// WHEN
-		const component = findByTestAttr(wrapper, "component-input");
+	describe("Testing general/basic functionality", () => {
+		it("should render the `Input` component", () => {
+			// WHEN
+			const component = findByTestAttr(wrapper, "component-input");
 
-		// THEN
-		expect(component.length).toBe(1);
-	});
+			// THEN
+			expect(component.length).toBe(1);
+		});
 
-	it("should not throw an error with expected props", () => {
-		// THEN
-		checkProps(Input, {
-			secretWord: "bueller",
+		it("should not throw an error with expected props", () => {
+			// THEN
+			checkProps(Input, {
+				secretWord: "bueller",
+			});
+		});
+
+		it("should update state with the value from the `Input` box upon change", () => {
+			// WHEN
+			const inputBox = findByTestAttr(wrapper, "input-box");
+			const mockEvent = {
+				target: {
+					value: "train",
+				},
+			};
+			inputBox.simulate("change", mockEvent);
+
+			// THEN
+			expect(mockSetCurrentGuess).toHaveBeenCalledWith("train");
+		});
+
+		it("should clear the `Input` field when the submit button is clicked", () => {
+			// WHEN
+			const submitButton = findByTestAttr(wrapper, "submit-button");
+			submitButton.simulate("click", { preventDefault() {} });
+
+			// THEN
+			expect(mockSetCurrentGuess).toHaveBeenCalledWith("");
 		});
 	});
 
-	// it("should throw an error with unexpected props", () => {
-	// 	// GIVEN
-	// 	const wrapper = setup({
-	// 		secretWord: ["bueller"],
-	// 	});
+	describe("Testing the `LanguagePicker` context", () => {
+		it("should correctly render the submit string in English", () => {
+			// GIVEN
+			const wrapper = setup({ language: "en" });
 
-	// 	// WHEN
-	// 	const stuff = checkProps(wrapper, {
-	// 		secretWord: "bueller",
-	// 	});
+			// WHEN
+			const submitButton = findByTestAttr(wrapper, "submit-button");
 
-	// 	// THEN
-	// 	expect(stuff).toBeTruthy();
-	// });
+			// THEN
+			expect(submitButton.text()).toBe("Submit");
+		});
 
-	it("should update state with the value from the input box upon change", () => {
-		// WHEN
-		const inputBox = findByTestAttr(wrapper, "input-box");
-		const mockEvent = {
-			target: {
-				value: "train",
-			},
-		};
-		inputBox.simulate("change", mockEvent);
+		it("should correctly render the submit string in Emoji", () => {
+			// GIVEN
+			const wrapper = setup({ language: "emo" });
 
-		// THEN
-		expect(mockSetCurrentGuess).toHaveBeenCalledWith("train");
-	});
+			// WHEN
+			const submitButton = findByTestAttr(wrapper, "submit-button");
 
-	it("should clear the input field when the submit button is clicked", () => {
-		// WHEN
-		const submitButton = findByTestAttr(wrapper, "submit-button");
-		submitButton.simulate("click", { preventDefault() {} });
-
-		// THEN
-		expect(mockSetCurrentGuess).toHaveBeenCalledWith("");
+			// THEN
+			expect(submitButton.text()).toBe("🚀");
+		});
 	});
 });

@@ -1,23 +1,23 @@
 // Packages
-import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import EnzymeAdapter from 'enzyme-adapter-react-16';
+import React from "react";
+import Enzyme, { shallow } from "enzyme";
+import EnzymeAdapter from "enzyme-adapter-react-16";
 
 // Context
 
 // Components
-import Congrats from './Congrats';
+import Congrats from "./Congrats";
 
 // Constants
 
 // Utils / Methods
-import { checkProps, findByTestAttr } from '../test/testUtils';
+import { checkProps, findByTestAttr } from "../test/testUtils";
 
 // Styles
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 const defaultProps = {
-  success: false,
+	success: false,
 };
 
 /**
@@ -27,44 +27,44 @@ const defaultProps = {
  * @returns {ShallowWrapper}
  */
 const setup = (props = {}) => {
-  const setupProps = {
-    ...defaultProps,
-    ...props,
-  };
+	const setupProps = {
+		...defaultProps,
+		...props,
+	};
 
-  return shallow(<Congrats {...setupProps} />);
+	return shallow(<Congrats {...setupProps} />);
 };
 
 // ---------------------------------------------
 // START OF ALL TESTS
 // ---------------------------------------------
-it('renders without error', () => {
-  // When
-  const wrapper = setup({ success: false });
-  const component = findByTestAttr(wrapper, 'component-congrats');
-  // Then
-  expect(component.length).toBe(1);
+it("renders without error", () => {
+	// When
+	const wrapper = setup({ success: false });
+	const component = findByTestAttr(wrapper, "component-congrats");
+	// Then
+	expect(component.length).toBe(1);
 });
 
 it('renders no text when "success" prop is false', () => {
-  // When
-  const wrapper = setup({ success: false });
-  const component = findByTestAttr(wrapper, 'component-congrats');
-  // Then
-  expect(component.text()).toBe('');
+	// When
+	const wrapper = setup({ success: false });
+	const component = findByTestAttr(wrapper, "component-congrats");
+	// Then
+	expect(component.text()).toBe("");
 });
 
 it('renders non-empty congrats message when "success" prop is true', () => {
-  // When
-  const wrapper = setup({ success: true });
-  const message = findByTestAttr(wrapper, 'congrats-message');
-  // Then
-  expect(message.text().length).not.toBe(0);
+	// When
+	const wrapper = setup({ success: true });
+	const message = findByTestAttr(wrapper, "congrats-message");
+	// Then
+	expect(message.text().length).not.toBe(0);
 });
 
-it('does not throw warning with expected props', () => {
-  // When
-  const expectedProps = { success: false };
-  // Then
-  checkProps(Congrats, expectedProps);
+it("does not throw warning with expected props", () => {
+	// When
+	const expectedProps = { success: false };
+	// Then
+	checkProps(Congrats, expectedProps);
 });

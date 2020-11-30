@@ -33,9 +33,6 @@ const defaultProps = { success: false };
  * @returns {ShallowWrapper}
  */
 const setup = ({ language = "en", success = false }) => {
-	// language = language || 'en';
-	// success = success || false;
-
 	return mount(
 		<LanguageContext.Provider value={language}>
 			<Congrats success={success} />
