@@ -15,44 +15,44 @@ import React from "react";
 /* ========================================================================== */
 // INTERNAL HELPERS, VARS & SET UP
 /* ========================================================================== */
-const SuccessContext = React.createContext();
+const GuessedWordsContext = React.createContext();
 
 /* ========================================================================== */
-// DEFINING THE `SUCCESS CONTEXT` METHODS
+// DEFINING THE `GUESSED WORDS CONTEXT` METHODS
 /* ========================================================================== */
 /**
- * @function useSuccess - Determines if the determined context is used within a SuccessProvider
- * @returns {array} - The `SuccessContext` value will be a state of [value, setter]
+ * @function useGuessedWords - Determines if the determined context is used within a GuessedWordsProvider
+ * @returns {array} - The `GuessedWordsContext` value will be a state of [value, setter]
  */
-const useSuccess = function () {
-	const context = React.useContext(SuccessContext);
+const useGuessedWords = function () {
+	const context = React.useContext(GuessedWordsContext);
 
 	if (!context) {
-		throw new Error("useSuccess must be used within a SuccessProvider");
+		throw new Error("useGuessedWords must be used within a GuessedWordsProvider");
 	}
 
 	return context;
 };
 
 /* ========================================================================== */
-// DEFINING THE `SUCCESS PROVIDER` COMPONENT
+// DEFINING THE `GUESSED WORDS PROVIDER` COMPONENT
 /* ========================================================================== */
 /**
- * @function SuccessProvider - m
+ * @function GuessedWordsProvider - m
  * @param {object} props - The props to pass through from the declared component
  * @returns {JSX.Element} - The final Provider component
  */
-const SuccessProvider = function (props) {
-	const [success, setSuccess] = React.useState(false);
+const GuessedWordsProvider = function (props) {
+	const [guessedWords, setGuessedWords] = React.useState(false);
 
 	const value = React.useMemo(() => {
-		return [success, setSuccess];
-	}, [success]);
+		return [guessedWords, setGuessedWords];
+	}, [guessedWords]);
 
-	return <SuccessContext.Provider value={value} {...props} />;
+	return <GuessedWordsContext.Provider value={value} {...props} />;
 };
 
 /* ========================================================================== */
 // ALL REQUIRED EXPORTS
 /* ========================================================================== */
-export default { SuccessProvider, useSuccess };
+export default { GuessedWordsProvider, useGuessedWords };
