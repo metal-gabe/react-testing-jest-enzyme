@@ -8,9 +8,12 @@ import React from "react";
 
 // Context
 import LanguageContext from "./contexts/languageContext";
+import SuccessContext from "./contexts/successContext";
 
 // Components
 import "./App.css";
+import Congrats from "./Congrats";
+import GuessedWords from "./GuessedWords";
 import Input from "./Input";
 import LanguagePicker from "./LanguagePicker";
 
@@ -89,7 +92,11 @@ const App = function () {
 			<LanguageContext.Provider value={state.language}>
 				<p>Lesson: Base for Hooks Context</p>
 				<LanguagePicker setLanguage={setLanguage} />
-				<Input secretWord={secretWord} />
+				<SuccessContext.SuccessProvider>
+					<Congrats />
+					<Input secretWord={secretWord} />
+				</SuccessContext.SuccessProvider>
+				{/* <GuessedWords /> */}
 			</LanguageContext.Provider>
 		</div>
 	);
