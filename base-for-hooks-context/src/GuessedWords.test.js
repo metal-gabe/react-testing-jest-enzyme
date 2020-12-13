@@ -8,6 +8,7 @@ import React from "react";
 import { shallow } from "enzyme";
 
 // Context
+import GuessedWordsContext from './contexts/guessedWordsContext';
 
 // Components
 import GuessedWords from "./GuessedWords";
@@ -16,7 +17,7 @@ import GuessedWords from "./GuessedWords";
 // Constants
 
 // Utils / Methods
-import { checkProps, findByTestAttr } from "../test/testUtils";
+import { findByTestAttr } from "../test/testUtils";
 
 // Styles
 
@@ -30,29 +31,23 @@ const defaultProps = {
 /**
  * Factory function to create a ShallowWrapper for the GuessedWords component.
  * @function setup
- * @param {object} props - Component props specific to this setup.
+ * @param {array} guessedWords - `guessedWords` value specific to this setup
  * @returns {ShallowWrapper}
  */
-const setup = (props = {}) => {
-	const setupProps = { ...defaultProps, ...props };
-	return shallow(<GuessedWords {...setupProps} />);
+const setup = (guessedWords = []) => {
+	const mockUseGuessedWords = jest.fn().mockReturnValue([guessedWords, jest.fn()]);
+	GuessedWordsContext.useGuessedWords = mockUseGuessedWords;
+	return shallow(<GuessedWords />);
 };
 
 /* ========================================================================== */
 // START OF ALL UNIT TESTS FOR `GUESSED WORDS` COMPONENT
 /* ========================================================================== */
-describe("Testing general/basic functionality for `GuessedWords`", () => {
-	it("does not throw warning with expected props", () => {
-		// THEN
-		checkProps(GuessedWords, defaultProps);
-	});
-});
-
 describe("Testing If There Are No Words Guessed", () => {
 	let wrapper;
 
 	beforeEach(() => {
-		wrapper = setup({ guessedWords: [] });
+		wrapper = setup([]);
 	});
 
 	it("renders without error", () => {
@@ -82,7 +77,7 @@ describe("Testing If There Are Words Guessed", () => {
 	];
 
 	beforeEach(() => {
-		wrapper = setup({ guessedWords });
+		wrapper = setup(guessedWords);
 	});
 
 	it("renders without error", () => {
@@ -113,7 +108,7 @@ describe("Testing If There Are Words Guessed", () => {
 describe("Testing the `LanguagePicker` Context", () => {
 	it("should correctly render the guess instructions string in English, by default", () => {
 		// GIVEN
-		const wrapper = setup({ guessedWords: [] });
+		const wrapper = setup([]);
 
 		// WHEN
 		const guessInstructions = findByTestAttr(wrapper, "guess-instructions");
@@ -126,7 +121,7 @@ describe("Testing the `LanguagePicker` Context", () => {
 		// GIVEN
 		const mockUseContext = jest.fn().mockReturnValue("emo");
 		React.useContext = mockUseContext;
-		const wrapper = setup({ guessedWords: [] });
+		const wrapper = setup([]);
 
 		// WHEN
 		const guessInstructions = findByTestAttr(wrapper, "guess-instructions");

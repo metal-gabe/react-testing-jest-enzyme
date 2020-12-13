@@ -5,9 +5,11 @@
 import React from "react";
 
 // Packages
+import chalk from "chalk";
 import PropTypes from "prop-types";
 
 // Context
+import GuessedWordsContext from "./contexts/guessedWordsContext";
 import LanguageContext from "./contexts/languageContext";
 
 // Components
@@ -20,59 +22,58 @@ import stringsModule from "./helpers/strings";
 // Styles
 
 /* ========================================================================== */
+// INTERNAL HELPERS, VARS & SET UP
+/* ========================================================================== */
+const logger = console.log;
+
+/* ========================================================================== */
 // DEFINING THE `GUESSED WORDS` COMPONENT
 /* ========================================================================== */
-const GuessedWords = function (props) {
+const GuessedWords = function () {
+	const [guessedWords] = GuessedWordsContext.useGuessedWords();
 	const language = React.useContext(LanguageContext);
-	let contents;
 
-	if (props.guessedWords.length === 0) {
-		contents = (
-			<span data-test="guess-instructions">
-				{stringsModule.getStringByLanguage(language, "guessPrompt")}
-			</span>
-		);
-	} else {
-		const guessedWordsRows = props.guessedWords.map((word, index) => (
-			<tr data-test="guessed-word" key={index}>
-				<td>{word.guessedWord}</td>
-				<td>{word.letterMatchCount}</td>
-			</tr>
-		));
-		contents = (
-			<div data-test="guessed-words">
-				<h3>
-					{stringsModule.getStringByLanguage(
-						language,
-						"guessedWordsTitle"
-					)}
-				</h3>
-				<table className="table table-sm">
-					<thead className="thead-light">
-						<tr>
-							<th>{stringsModule.getStringByLanguage(language, "guessColumnHeader")}</th>
-							<th>{stringsModule.getStringByLanguage(language, "matchingLettersColumnHeader")}</th>
-						</tr>
-					</thead>
-					<tbody>{guessedWordsRows}</tbody>
-				</table>
-			</div>
-		);
-	}
+	return (
+		<div data-test="component-guessed-words">
+			{!guessedWords.length && (
+				<span data-test="guess-instructions">
+					{stringsModule.getStringByLanguage(language, "guessPrompt")}
+				</span>
+			)}
+			{guessedWords.length && (
+				<div data-test="guessed-words">
+					<h3>{stringsModule.getStringByLanguage(language, "guessedWordsTitle")}</h3>
+					<table className="table table-sm">
+						<thead className="thead-light">
+							<tr>
+								<th>{stringsModule.getStringByLanguage(language, "guessColumnHeader")}</th>
+								<th>
+									{stringsModule.getStringByLanguage(
+										language,
+										"matchingLettersColumnHeader"
+									)}
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{guessedWords.map((word, idx) => {
+								const guessed = chalk.bold.underline.whiteBright;
+								logger("------------------------------------------------");
+								logger(`${idx+1}. One of your guesses is the word: ${guessed(word.guessedWord)}`);
 
-	return <div data-test="component-guessed-words">{contents}</div>;
-};
-
-/* ========================================================================== */
-// PROP TYPES DECLARATIONS & DEFAULT EXPORT
-/* ========================================================================== */
-GuessedWords.propTypes = {
-	guessedWords: PropTypes.arrayOf(
-		PropTypes.shape({
-			guessedWord: PropTypes.string.isRequired,
-			letterMatchCount: PropTypes.number.isRequired,
-		})
-	).isRequired,
+								return (
+									<tr data-test="guessed-word" key={idx}>
+										<td>{word.guessedWord}</td>
+										<td>{word.letterMatchCount}</td>
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</div>
+			)}
+		</div>
+	);
 };
 
 /* ========================================================================== */
