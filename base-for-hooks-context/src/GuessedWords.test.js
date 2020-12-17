@@ -8,7 +8,7 @@ import React from "react";
 import { shallow } from "enzyme";
 
 // Context
-import GuessedWordsContext from './contexts/guessedWordsContext';
+import GuessedWordsContext from "./contexts/guessedWordsContext";
 
 // Components
 import GuessedWords from "./GuessedWords";
@@ -25,7 +25,7 @@ import { findByTestAttr } from "../test/testUtils";
 // INTERNAL HELPERS, VARS & SET UP
 /* ========================================================================== */
 const defaultProps = {
-	guessedWords: [{ guessedWord: "train", letterMatchCount: 3 }],
+   guessedWords: [{ guessedWord: "train", letterMatchCount: 3 }],
 };
 
 /**
@@ -35,98 +35,98 @@ const defaultProps = {
  * @returns {ShallowWrapper}
  */
 const setup = (guessedWords = []) => {
-	const mockUseGuessedWords = jest.fn().mockReturnValue([guessedWords, jest.fn()]);
-	GuessedWordsContext.useGuessedWords = mockUseGuessedWords;
-	return shallow(<GuessedWords />);
+   const mockUseGuessedWords = jest.fn().mockReturnValue([guessedWords, jest.fn()]);
+   GuessedWordsContext.useGuessedWords = mockUseGuessedWords;
+   return shallow(<GuessedWords />);
 };
 
 /* ========================================================================== */
 // START OF ALL UNIT TESTS FOR `GUESSED WORDS` COMPONENT
 /* ========================================================================== */
 describe("Testing If There Are No Words Guessed", () => {
-	let wrapper;
+   let wrapper;
 
-	beforeEach(() => {
-		wrapper = setup([]);
-	});
+   beforeEach(() => {
+      wrapper = setup([]);
+   });
 
-	it("renders without error", () => {
-		// WHEN
-		const component = findByTestAttr(wrapper, "component-guessed-words");
+   it("renders without error", () => {
+      // WHEN
+      const component = findByTestAttr(wrapper, "component-guessed-words");
 
-		// THEN
-		expect(component.length).toBe(1);
-	});
+      // THEN
+      expect(component.length).toBe(1);
+   });
 
-	it("renders instructions to guess a word", () => {
-		// WHEN
-		const instructions = findByTestAttr(wrapper, "guess-instructions");
+   it("renders instructions to guess a word", () => {
+      // WHEN
+      const instructions = findByTestAttr(wrapper, "guess-instructions");
 
-		// THEN
-		expect(instructions.text().length).not.toBe(0);
-	});
+      // THEN
+      expect(instructions.text().length).not.toBe(0);
+   });
 });
 
 describe("Testing If There Are Words Guessed", () => {
-	let wrapper;
+   let wrapper;
 
-	const guessedWords = [
-		{ guessedWord: "train", letterMatchCount: 3 },
-		{ guessedWord: "agile", letterMatchCount: 1 },
-		{ guessedWord: "party", letterMatchCount: 5 },
-	];
+   const guessedWords = [
+      { guessedWord: "train", letterMatchCount: 3 },
+      { guessedWord: "agile", letterMatchCount: 1 },
+      { guessedWord: "party", letterMatchCount: 5 },
+   ];
 
-	beforeEach(() => {
-		wrapper = setup(guessedWords);
-	});
+   beforeEach(() => {
+      wrapper = setup(guessedWords);
+   });
 
-	it("renders without error", () => {
-		// WHEN
-		const component = findByTestAttr(wrapper, "component-guessed-words");
+   it("renders without error", () => {
+      // WHEN
+      const component = findByTestAttr(wrapper, "component-guessed-words");
 
-		// THEN
-		expect(component.length).toBe(1);
-	});
+      // THEN
+      expect(component.length).toBe(1);
+   });
 
-	it('renders "guessed words" section', () => {
-		// WHEN
-		const guessedWordsNode = findByTestAttr(wrapper, "guessed-words");
+   it('renders "guessed words" section', () => {
+      // WHEN
+      const guessedWordsNode = findByTestAttr(wrapper, "guessed-words");
 
-		// THEN
-		expect(guessedWordsNode.length).toBe(1);
-	});
+      // THEN
+      expect(guessedWordsNode.length).toBe(1);
+   });
 
-	it("correct number of guessed words", () => {
-		// WHEN
-		const guessedWordNodes = findByTestAttr(wrapper, "guessed-word");
+   it("correct number of guessed words", () => {
+      // WHEN
+      const guessedWordNodes = findByTestAttr(wrapper, "guessed-word");
 
-		// THEN
-		expect(guessedWordNodes.length).toBe(guessedWords.length);
-	});
+      // THEN
+      expect(guessedWordNodes.length).toBe(guessedWords.length);
+   });
 });
 
 describe("Testing the `LanguagePicker` Context", () => {
-	it("should correctly render the guess instructions string in English, by default", () => {
-		// GIVEN
-		const wrapper = setup([]);
+   it("should correctly render the guess instructions string in English, by default", () => {
+      // GIVEN
+      const wrapper = setup([]);
 
-		// WHEN
-		const guessInstructions = findByTestAttr(wrapper, "guess-instructions");
+      // WHEN
+      const guessInstructions = findByTestAttr(wrapper, "guess-instructions");
 
-		// THEN
-		expect(guessInstructions.text()).toBe("Try to guess the secret word!");
-	});
+      // THEN
+      expect(guessInstructions.text()).toBe("Try to guess the secret word!");
+   });
 
-	it("should correctly render the guess instructions string in Emoji", () => {
-		// GIVEN
-		const mockUseContext = jest.fn().mockReturnValue("emo");
-		React.useContext = mockUseContext;
-		const wrapper = setup([]);
+   it("should correctly render the guess instructions string in Emoji", () => {
+      // GIVEN
+      const mockUseContext = jest.fn().mockReturnValue("emo");
+      React.useContext = mockUseContext;
+      const wrapper = setup([]);
 
-		// WHEN
-		const guessInstructions = findByTestAttr(wrapper, "guess-instructions");
+      // WHEN
+      const guessInstructions = findByTestAttr(wrapper, "guess-instructions");
 
-		// THEN
-		expect(guessInstructions.text()).toBe("🤔 🤫 🔤");
-	});
+      // THEN
+      expect(guessInstructions.text()).toBe("🤔 🤫 🔤");
+   });
 });

@@ -30,50 +30,56 @@ const logger = console.log;
 // DEFINING THE `GUESSED WORDS` COMPONENT
 /* ========================================================================== */
 const GuessedWords = function () {
-	const [guessedWords] = GuessedWordsContext.useGuessedWords();
-	const language = React.useContext(LanguageContext);
+   const [guessedWords] = GuessedWordsContext.useGuessedWords();
+   const language = React.useContext(LanguageContext);
 
-	return (
-		<div data-test="component-guessed-words">
-			{!guessedWords.length && (
-				<span data-test="guess-instructions">
-					{stringsModule.getStringByLanguage(language, "guessPrompt")}
-				</span>
-			)}
-			{guessedWords.length && (
-				<div data-test="guessed-words">
-					<h3>{stringsModule.getStringByLanguage(language, "guessedWordsTitle")}</h3>
-					<table className="table table-sm">
-						<thead className="thead-light">
-							<tr>
-								<th>{stringsModule.getStringByLanguage(language, "guessColumnHeader")}</th>
-								<th>
-									{stringsModule.getStringByLanguage(
-										language,
-										"matchingLettersColumnHeader"
-									)}
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							{guessedWords.map((word, idx) => {
-								const guessed = chalk.bold.underline.whiteBright;
-								logger("------------------------------------------------");
-								logger(`${idx+1}. One of your guesses is the word: ${guessed(word.guessedWord)}`);
+   return (
+      <div data-test="component-guessed-words">
+         {!guessedWords.length && (
+            <span data-test="guess-instructions">
+               {stringsModule.getStringByLanguage(language, "guessPrompt")}
+            </span>
+         )}
+         {guessedWords.length && (
+            <div data-test="guessed-words">
+               <h3>{stringsModule.getStringByLanguage(language, "guessedWordsTitle")}</h3>
+               <table className="table table-sm">
+                  <thead className="thead-light">
+                     <tr>
+                        <th>{stringsModule.getStringByLanguage(language, "guessColumnHeader")}</th>
+                        <th>
+                           {stringsModule.getStringByLanguage(
+                              language,
+                              "matchingLettersColumnHeader"
+                           )}
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {guessedWords.map((word, idx) => {
+                        const { guessedWord, letterMatchCount } = word;
+                        const styledGuess = chalk.bold.underline.whiteBright;
 
-								return (
-									<tr data-test="guessed-word" key={idx}>
-										<td>{word.guessedWord}</td>
-										<td>{word.letterMatchCount}</td>
-									</tr>
-								);
-							})}
-						</tbody>
-					</table>
-				</div>
-			)}
-		</div>
-	);
+                        logger("------------------------------------------------");
+                        logger(
+                           `${idx + 1}. One of your guesses was the word: ${styledGuess(
+                              guessedWord
+                           )}`
+                        );
+
+                        return (
+                           <tr data-test="guessed-word" key={idx}>
+                              <td>{guessedWord}</td>
+                              <td>{letterMatchCount}</td>
+                           </tr>
+                        );
+                     })}
+                  </tbody>
+               </table>
+            </div>
+         )}
+      </div>
+   );
 };
 
 /* ========================================================================== */
