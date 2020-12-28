@@ -1,9 +1,9 @@
-## =============================================================================
+## =================================================================================================
 ## LINKS
 ## https://editorconfig.org/
 ## https://github.com/ec4j/editorconfig-gradle-plugin
 ## https://plugins.gradle.org/plugin/org.ec4j.editorconfig
-## =============================================================================
+## =================================================================================================
 
 # Setting this file as the top most Editor Config file
 root = true
@@ -13,8 +13,8 @@ root = true
 charset = utf-8
 end_of_line = lf
 indent_size = 3
-indent_style = space
-   # other option = tab
+# indent_style = space
+indent_style = tab
 insert_final_newline = true
 max_line_length = 100
 tab_width = 3
@@ -23,9 +23,9 @@ trim_trailing_whitespace = true
 [*.yml]
 indent_style = space
 
-## =============================================================================
+## =================================================================================================
 ## IntelliJ Specific Rules
-## =============================================================================
+## =================================================================================================
 ij_continuation_indent_size = 8
 ij_formatter_off_tag = @formatter:off
 ij_formatter_on_tag = @formatter:on

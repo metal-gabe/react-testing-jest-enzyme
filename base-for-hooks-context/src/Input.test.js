@@ -1,6 +1,6 @@
-/* ========================================================================== */
+/* ============================================================================================== */
 // ALL REQUIRED IMPORTS
-/* ========================================================================== */
+/* ============================================================================================== */
 // React
 import React from "react";
 
@@ -9,6 +9,7 @@ import { mount } from "enzyme";
 
 // Context
 import LanguageContext from "./contexts/languageContext";
+import SuccessContext from "./contexts/successContext";
 
 // Components
 import Input from "./Input";
@@ -21,25 +22,30 @@ import { checkProps, findByTestAttr } from "./../test/testUtils";
 
 // Styles
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // SETUP UTIL AND HELPER METHODS
-/* ========================================================================== */
+/* ============================================================================================== */
 /**
  * Create ReactWrapper for Input component for testing
  * @param {object} testValues - Context and props values for this specific test.
  * @returns {ReactWrapper} - Wrapper for Input component and providers.
  */
-const setup = ({ language = "en", secretWord = "party" }) => {
+const setup = (props) => {
+	const { language = "en", secretWord = "party", success = false } = props;
+	const setSuccessMock = jest.fn();
+
 	return mount(
 		<LanguageContext.Provider value={language}>
-			<Input secretWord={secretWord} />
+			<SuccessContext.SuccessProvider value={[success, setSuccessMock]}>
+				<Input secretWord={secretWord} />
+			</SuccessContext.SuccessProvider>
 		</LanguageContext.Provider>
 	);
 };
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // START OF ALL UNIT TESTS FOR `INPUT` COMPONENT
-/* ========================================================================== */
+/* ============================================================================================== */
 describe("State Controlled `Input` Field", () => {
 	const mockSetCurrentGuess = jest.fn();
 	let wrapper;
@@ -117,6 +123,16 @@ describe("State Controlled `Input` Field", () => {
 
 			// THEN
 			expect(submitButton.text()).toBe("🚀");
+		});
+	});
+
+	describe("Testing the `SuccessContext` provider", () => {
+		it("should not render the `Input` component when `success` is `true`", () => {
+			// GIVEN
+			const wrapper = setup({ secret: "party", success: true });
+			// WHEN
+			// THEN
+			expect(wrapper.isEmptyRender()).toBe(true);
 		});
 	});
 });

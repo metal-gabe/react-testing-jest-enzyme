@@ -1,6 +1,6 @@
-/* ========================================================================== */
+/* ============================================================================================== */
 // ALL REQUIRED IMPORTS
-/* ========================================================================== */
+/* ============================================================================================== */
 // React
 import React from "react";
 
@@ -26,9 +26,9 @@ import hookActions from "./actions/hookActions";
 
 // Styles
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // INTERNAL HELPERS, VARS & SET UP
-/* ========================================================================== */
+/* ============================================================================================== */
 /**
  * A reducer to update state; called automatically by `dispatch`
  * @param {object} state - existing state
@@ -37,81 +37,81 @@ import hookActions from "./actions/hookActions";
  * @return {object} - new state
  */
 const reducer = (state, action) => {
-   switch (action.type) {
-      case "setSecretWord":
-         return { ...state, secretWord: action.payload };
-      case "setLanguage":
-         return { ...state, language: action.payload };
-      default:
-         throw new Error(`Invalid action type: ${action.type}`);
-   }
+	switch (action.type) {
+		case "setSecretWord":
+			return { ...state, secretWord: action.payload };
+		case "setLanguage":
+			return { ...state, language: action.payload };
+		default:
+			throw new Error(`Invalid action type: ${action.type}`);
+	}
 };
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // DEFINING THE `MAIN APP` COMPONENT
-/* ========================================================================== */
+/* ============================================================================================== */
 const App = function () {
-   const [state, dispatch] = React.useReducer(reducer, {
-      language: "en",
-      secretWord: null,
-   });
+	const [state, dispatch] = React.useReducer(reducer, {
+		language: "en",
+		secretWord: null,
+	});
 
-   const SET_LANGUAGE = "setLanguage";
-   const SET_SECRET_WORD = "setSecretWord";
-   const { secretWord } = state;
+	const SET_LANGUAGE = "setLanguage";
+	const SET_SECRET_WORD = "setSecretWord";
+	const { secretWord } = state;
 
-   const setSecretWord = (secretWord) =>
-      dispatch({
-         payload: secretWord,
-         type: SET_SECRET_WORD,
-      });
+	const setSecretWord = (secretWord) =>
+		dispatch({
+			payload: secretWord,
+			type: SET_SECRET_WORD,
+		});
 
-   const setLanguage = (language) =>
-      dispatch({
-         payload: language,
-         type: SET_LANGUAGE,
-      });
+	const setLanguage = (language) =>
+		dispatch({
+			payload: language,
+			type: SET_LANGUAGE,
+		});
 
-   React.useEffect(() => {
-      hookActions.getSecretWord(setSecretWord);
-   }, []);
+	React.useEffect(() => {
+		hookActions.getSecretWord(setSecretWord);
+	}, []);
 
-   if (!secretWord) {
-      return (
-         <div className="container" data-test="spinner">
-            <div className="spinner-border" role="status">
-               <span className="sr-only">Loading...</span>
-            </div>
-            <p>Loading the secret word...</p>
-         </div>
-      );
-   }
+	if (!secretWord) {
+		return (
+			<div className="container" data-test="spinner">
+				<div className="spinner-border" role="status">
+					<span className="sr-only">Loading...</span>
+				</div>
+				<p>Loading the secret word...</p>
+			</div>
+		);
+	}
 
-   return (
-      <div className="container app" data-test="component-app">
-         <h1>Jotto Bueller?</h1>
-         <LanguageContext.Provider value={state.language}>
-            <p>Lesson: Base for Hooks Context</p>
-            <LanguagePicker setLanguage={setLanguage} />
-            <GuessedWordsContext.GuessedWordsProvider>
-               <SuccessContext.SuccessProvider>
-                  <Congrats />
-                  <Input secretWord={secretWord} />
-               </SuccessContext.SuccessProvider>
-               <GuessedWords />
-            </GuessedWordsContext.GuessedWordsProvider>
-         </LanguageContext.Provider>
-      </div>
-   );
+	return (
+		<div className="container app" data-test="component-app">
+			<h1>Jotto Bueller?</h1>
+			<LanguageContext.Provider value={state.language}>
+				<p>Lesson: Base for Hooks Context</p>
+				<LanguagePicker setLanguage={setLanguage} />
+				<GuessedWordsContext.GuessedWordsProvider>
+					<SuccessContext.SuccessProvider>
+						<Congrats />
+						<Input secretWord={secretWord} />
+					</SuccessContext.SuccessProvider>
+					<GuessedWords />
+				</GuessedWordsContext.GuessedWordsProvider>
+			</LanguageContext.Provider>
+		</div>
+	);
 };
 
-/* ========================================================================== */
+/* ============================================================================================== */
 /* PROP TYPES DECLARATIONS */
-/* ========================================================================== */
+/* ============================================================================================== */
 App.defaultProps = {};
 App.propTypes = {};
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // ALL REQUIRED EXPORTS
-/* ========================================================================== */
+/* ============================================================================================== */
 export default App;

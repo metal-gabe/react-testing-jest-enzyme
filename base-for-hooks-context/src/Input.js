@@ -1,6 +1,6 @@
-/* ========================================================================== */
+/* ============================================================================================== */
 // ALL REQUIRED IMPORTS
-/* ========================================================================== */
+/* ============================================================================================== */
 // React
 import React from "react";
 
@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 
 // Context
 import LanguageContext from "./contexts/languageContext";
+import SuccessContext from "./contexts/successContext";
 
 // Components
 // Assets
@@ -19,12 +20,17 @@ import stringsModule from "./helpers/strings";
 
 // Styles
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // DEFINING THE `INPUT` COMPONENT
-/* ========================================================================== */
+/* ============================================================================================== */
 const Input = function ({ secretWord }) {
 	const language = React.useContext(LanguageContext);
 	const [currentGuess, setCurrentGuess] = React.useState("");
+	const [success, setSuccess] = SuccessContext.useSuccess();
+
+	if (success) {
+		return null;
+	};
 
 	return (
 		<div data-test="component-input">
@@ -37,10 +43,7 @@ const Input = function ({ secretWord }) {
 						const { value } = event.target;
 						setCurrentGuess(value);
 					}}
-					placeholder={stringsModule.getStringByLanguage(
-						language,
-						"guessInputPlaceholder"
-					)}
+					placeholder={stringsModule.getStringByLanguage(language, "guessInputPlaceholder")}
 					type="text"
 					value={currentGuess}
 				/>
@@ -62,9 +65,9 @@ const Input = function ({ secretWord }) {
 	);
 };
 
-/* ========================================================================== */
+/* ============================================================================================== */
 /* PROP TYPES DECLARATIONS */
-/* ========================================================================== */
+/* ============================================================================================== */
 Input.defaultProps = {
 	secretWord: "",
 };
@@ -73,7 +76,7 @@ Input.propTypes = {
 	secretWord: PropTypes.string.isRequired,
 };
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // ALL REQUIRED EXPORTS
-/* ========================================================================== */
+/* ============================================================================================== */
 export default Input;
