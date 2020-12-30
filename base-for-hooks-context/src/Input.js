@@ -53,7 +53,11 @@ const Input = function ({ secretWord }) {
 					onClick={(event) => {
 						event.preventDefault();
 						// TODO **[G]** :: update `guessedWords`
-						// TODO **[G]** :: check against `secretWord` and update "success" if needed
+						// check against `secretWord` and update "success" if needed
+						if (currentGuess === secretWord) {
+							setSuccess(true);
+						}
+						// clearing the input box
 						setCurrentGuess("");
 					}}
 					type="submit"

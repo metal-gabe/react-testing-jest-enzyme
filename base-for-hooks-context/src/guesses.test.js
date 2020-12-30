@@ -55,6 +55,14 @@ describe("Simulating & testing word guesses", () => {
 			inputBox.simulate("change", mockEvent);
 			submitButton.simulate("click");
 		});
+
+		it("should NOT render any children inside of the `Input` component", () => {
+			// GIVEN
+			const inputComponent = findByTestAttr(wrapper, "component-input");
+			// WHEN
+			// THEN
+			expect(inputComponent.children().length).toBe(0);
+		});
 	});
 
 	describe("when the submitted guess is INCORRECT", () => {
@@ -62,6 +70,13 @@ describe("Simulating & testing word guesses", () => {
 			const mockEvent = { target: { value: "train" } };
 			inputBox.simulate("change", mockEvent);
 			submitButton.simulate("click");
+		});
+
+		it("should STILL render the `Input` component", () => {
+			// GIVEN
+			// WHEN
+			// THEN
+			expect(inputBox.exists()).toBe(true);
 		});
 	});
 });
