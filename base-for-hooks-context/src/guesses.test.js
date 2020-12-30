@@ -8,9 +8,11 @@ import React from "react";
 import { mount } from "enzyme";
 
 // Context
+import GuessedWordsContext from "./contexts/guessedWordsContext";
 import SuccessContext from "./contexts/successContext";
 
 // Components
+import GuessedWords from "./GuessedWords";
 import Input from "./Input";
 
 // Assets
@@ -24,15 +26,24 @@ import { findByTestAttr } from "./../test/testUtils";
 /* ========================================================================== */
 // INTERNAL SET UP, UTILS, AND HELPER METHODS
 /* ========================================================================== */
-const setup = (props = { secretWord: "party" }) => {
+const setup = (props = { guessedWords: [], secretWord: "party" }) => {
 	const wrapper = mount(
-		<SuccessContext.SuccessProvider>
-			<Input {...props} />
-		</SuccessContext.SuccessProvider>
+		<GuessedWordsContext.GuessedWordsProvider>
+			<SuccessContext.SuccessProvider>
+				<Input {...props} />
+			</SuccessContext.SuccessProvider>
+		</GuessedWordsContext.GuessedWordsProvider>
 	);
 
 	const inputBox = findByTestAttr(wrapper, "input-box");
 	const submitButton = findByTestAttr(wrapper, "submit-button");
+
+	// pre-populating `guessedWords` context by simulating a word guess
+	props.guessedWords.map((word) => {
+		const mockEvent = { target: { value: word } };
+		inputBox.simulate("change", mockEvent);
+		submitButton.simulate("click");
+	});
 
 	return [wrapper, inputBox, submitButton];
 };
@@ -51,6 +62,7 @@ describe("Simulating & testing word guesses", () => {
 
 	describe("When the submitted guess is CORRECT", () => {
 		beforeEach(() => {
+			// GIVEN
 			const mockEvent = { target: { value: "party" } };
 			inputBox.simulate("change", mockEvent);
 			submitButton.simulate("click");
@@ -59,7 +71,6 @@ describe("Simulating & testing word guesses", () => {
 		it("should NOT render any children inside of the `Input` component", () => {
 			// GIVEN
 			const inputComponent = findByTestAttr(wrapper, "component-input");
-			// WHEN
 			// THEN
 			expect(inputComponent.children().length).toBe(0);
 		});
@@ -67,14 +78,13 @@ describe("Simulating & testing word guesses", () => {
 
 	describe("when the submitted guess is INCORRECT", () => {
 		beforeEach(() => {
+			// GIVEN
 			const mockEvent = { target: { value: "train" } };
 			inputBox.simulate("change", mockEvent);
 			submitButton.simulate("click");
 		});
 
 		it("should STILL render the `Input` component", () => {
-			// GIVEN
-			// WHEN
 			// THEN
 			expect(inputBox.exists()).toBe(true);
 		});

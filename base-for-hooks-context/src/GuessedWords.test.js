@@ -47,13 +47,13 @@ describe("Testing if There Are No Words Guessed", () => {
 	let wrapper;
 
 	beforeEach(() => {
+		// GIVEN
 		wrapper = setup([]);
 	});
 
 	it("renders without error", () => {
 		// WHEN
 		const component = findByTestAttr(wrapper, "component-guessed-words");
-
 		// THEN
 		expect(component.length).toBe(1);
 	});
@@ -61,7 +61,6 @@ describe("Testing if There Are No Words Guessed", () => {
 	it("renders instructions to guess a word", () => {
 		// WHEN
 		const instructions = findByTestAttr(wrapper, "guess-instructions");
-
 		// THEN
 		expect(instructions.text().length).not.toBe(0);
 	});
@@ -77,13 +76,13 @@ describe("Testing if There Are Words Guessed", () => {
 	];
 
 	beforeEach(() => {
+		// GIVEN
 		wrapper = setup(guessedWords);
 	});
 
 	it("renders without error", () => {
 		// WHEN
 		const component = findByTestAttr(wrapper, "component-guessed-words");
-
 		// THEN
 		expect(component.length).toBe(1);
 	});
@@ -91,7 +90,6 @@ describe("Testing if There Are Words Guessed", () => {
 	it('renders "guessed words" section', () => {
 		// WHEN
 		const guessedWordsNode = findByTestAttr(wrapper, "guessed-words");
-
 		// THEN
 		expect(guessedWordsNode.length).toBe(1);
 	});
@@ -99,7 +97,6 @@ describe("Testing if There Are Words Guessed", () => {
 	it("correct number of guessed words", () => {
 		// WHEN
 		const guessedWordNodes = findByTestAttr(wrapper, "guessed-word");
-
 		// THEN
 		expect(guessedWordNodes.length).toBe(guessedWords.length);
 	});
@@ -109,10 +106,8 @@ describe("Testing the `LanguagePicker` Context", () => {
 	it("should correctly render the guess instructions string in English, by default", () => {
 		// GIVEN
 		const wrapper = setup([]);
-
 		// WHEN
 		const guessInstructions = findByTestAttr(wrapper, "guess-instructions");
-
 		// THEN
 		expect(guessInstructions.text()).toBe("Try to guess the secret word!");
 	});
@@ -122,10 +117,8 @@ describe("Testing the `LanguagePicker` Context", () => {
 		const mockUseContext = jest.fn().mockReturnValue("emo");
 		React.useContext = mockUseContext;
 		const wrapper = setup([]);
-
 		// WHEN
 		const guessInstructions = findByTestAttr(wrapper, "guess-instructions");
-
 		// THEN
 		expect(guessInstructions.text()).toBe("🤔 🤫 🔤");
 	});

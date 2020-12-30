@@ -88,10 +88,12 @@ const App = function () {
 	}
 
 	return (
-		<div className="container app" data-test="component-app">
-			<h1>Jotto Bueller?</h1>
-			<LanguageContext.Provider value={state.language}>
+		<main className="container app" data-test="component-app">
+			<section className="container app-info">
+				<h1>Jotto Bueller?</h1>
 				<p>Lesson: Base for Hooks Context</p>
+			</section>
+			<LanguageContext.Provider value={state.language}>
 				<LanguagePicker setLanguage={setLanguage} />
 				<GuessedWordsContext.GuessedWordsProvider>
 					<SuccessContext.SuccessProvider>
@@ -101,7 +103,7 @@ const App = function () {
 					<GuessedWords />
 				</GuessedWordsContext.GuessedWordsProvider>
 			</LanguageContext.Provider>
-		</div>
+		</main>
 	);
 };
 

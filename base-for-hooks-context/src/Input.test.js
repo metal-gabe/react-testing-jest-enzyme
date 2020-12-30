@@ -65,7 +65,6 @@ describe("State Controlled `Input` Field", () => {
 		it("should render the `Input` component", () => {
 			// WHEN
 			const component = findByTestAttr(wrapper, "component-input");
-
 			// THEN
 			expect(component.length).toBe(1);
 		});
@@ -96,7 +95,6 @@ describe("State Controlled `Input` Field", () => {
 			// WHEN
 			const submitButton = findByTestAttr(wrapper, "submit-button");
 			submitButton.simulate("click", { preventDefault() {} });
-
 			// THEN
 			expect(mockSetCurrentGuess).toHaveBeenCalledWith("");
 		});
@@ -106,10 +104,8 @@ describe("State Controlled `Input` Field", () => {
 		it("should correctly render the submit string in English", () => {
 			// GIVEN
 			const wrapper = setup({ language: "en" });
-
 			// WHEN
 			const submitButton = findByTestAttr(wrapper, "submit-button");
-
 			// THEN
 			expect(submitButton.text()).toBe("Submit");
 		});
@@ -117,10 +113,8 @@ describe("State Controlled `Input` Field", () => {
 		it("should correctly render the submit string in Emoji", () => {
 			// GIVEN
 			const wrapper = setup({ language: "emo" });
-
 			// WHEN
 			const submitButton = findByTestAttr(wrapper, "submit-button");
-
 			// THEN
 			expect(submitButton.text()).toBe("🚀");
 		});
@@ -130,7 +124,6 @@ describe("State Controlled `Input` Field", () => {
 		it("should not render the `Input` component when `success` is `true`", () => {
 			// GIVEN
 			const wrapper = setup({ secret: "party", success: true });
-			// WHEN
 			// THEN
 			expect(wrapper.isEmptyRender()).toBe(true);
 		});
