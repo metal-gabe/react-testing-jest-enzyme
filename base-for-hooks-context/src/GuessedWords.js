@@ -40,7 +40,7 @@ const GuessedWords = function () {
 					{stringsModule.getStringByLanguage(language, "guessPrompt")}
 				</span>
 			)}
-			{guessedWords.length && (
+			{guessedWords.length > 0 && (
 				<div data-test="guessed-words">
 					<h3>{stringsModule.getStringByLanguage(language, "guessedWordsTitle")}</h3>
 					<table className="table table-sm">
