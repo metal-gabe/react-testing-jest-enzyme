@@ -68,7 +68,7 @@ const GuessedWords = function () {
 								);
 
 								return (
-									<tr data-test="guessed-word" key={idx}>
+									<tr className="guessed-word-row" data-test="guessed-word-row" key={idx}>
 										<td>{guessedWord}</td>
 										<td>{letterMatchCount}</td>
 									</tr>

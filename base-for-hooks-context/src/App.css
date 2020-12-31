@@ -19,3 +19,8 @@ body {
 .language-icon {
 	cursor: pointer;
 }
+
+.guessed-word-row {
+	background-color: #282c34;
+	color: #eeeeee;
+}

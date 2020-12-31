@@ -8,6 +8,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Context
+import GuessedWordsContext from "./contexts/guessedWordsContext";
 import LanguageContext from "./contexts/languageContext";
 import SuccessContext from "./contexts/successContext";
 
@@ -16,7 +17,9 @@ import SuccessContext from "./contexts/successContext";
 // Constants
 
 // Utils / Methods
+
 import stringsModule from "./helpers/strings";
+import { getLetterMatchCount } from "./helpers";
 
 // Styles
 
@@ -25,12 +28,16 @@ import stringsModule from "./helpers/strings";
 /* ============================================================================================== */
 const Input = function ({ secretWord }) {
 	const language = React.useContext(LanguageContext);
-	const [currentGuess, setCurrentGuess] = React.useState("");
 	const [success, setSuccess] = SuccessContext.useSuccess();
+	const [guessedWords, setGuessedWords] = GuessedWordsContext.useGuessedWords();
+   // console.log('--BLLR? ---------------------------------------------------------------------------');
+   // console.log('--BLLR? -> file: Input.js -> line 33 -> Input -> guessedWords ->', guessedWords);
+   // console.log('--BLLR? ---------------------------------------------------------------------------');
+	const [currentGuess, setCurrentGuess] = React.useState("");
 
 	if (success) {
 		return null;
-	};
+	}
 
 	return (
 		<div data-test="component-input">
@@ -52,11 +59,21 @@ const Input = function ({ secretWord }) {
 					data-test="submit-button"
 					onClick={(event) => {
 						event.preventDefault();
-						// TODO **[G]** :: update `guessedWords`
+						//update `guessedWords`
+						const letterMatchCount = getLetterMatchCount(currentGuess, secretWord);
+
+						const newGuessedWords = [
+							...guessedWords,
+							{ guessedWord: currentGuess, letterMatchCount },
+						];
+
+						setGuessedWords(newGuessedWords);
+
 						// check against `secretWord` and update "success" if needed
 						if (currentGuess === secretWord) {
 							setSuccess(true);
 						}
+
 						// clearing the input box
 						setCurrentGuess("");
 					}}

@@ -81,7 +81,7 @@ describe("Simulating & testing word guesses", () => {
 
 			it("should show the same number of rows in `GuessedWords` as there were guesses made", () => {
 				// GIVEN
-				const guessedWordsTableRows = findByTestAttr(wrapper, "guessed-word");
+				const guessedWordsTableRows = findByTestAttr(wrapper, "guessed-word-row");
 				// THEN
 				expect(guessedWordsTableRows.length).toBe(2);
 			});
@@ -102,10 +102,30 @@ describe("Simulating & testing word guesses", () => {
 
 			it("should show the same number of rows in `GuessedWords` as there were guesses made", () => {
 				// GIVEN
-				const guessedWordsTableRows = findByTestAttr(wrapper, "guessed-word");
+				const guessedWordsTableRows = findByTestAttr(wrapper, "guessed-word-row");
 				// THEN
 				expect(guessedWordsTableRows.length).toBe(2);
 			});
+		});
+	});
+
+	describe("When the `guessedWords` context IS empty", () => {
+		beforeEach(() => {
+			[wrapper, inputBox, submitButton] = setup({
+				guessedWordsStrings: [],
+				secretWord: "party",
+			});
+		});
+
+		it("should show the correct number of rows in `GuessedWords` even after an incorrect guesses", () => {
+			// GIVEN
+			const mockEvent = { target: { value: "train" } };
+			// WHEN
+			inputBox.simulate("change", mockEvent);
+			submitButton.simulate("click");
+			const guessedWordsTableRows = findByTestAttr(wrapper, "guessed-word-row");
+			// THEN
+			expect(guessedWordsTableRows.length).toBe(1);
 		});
 	});
 });

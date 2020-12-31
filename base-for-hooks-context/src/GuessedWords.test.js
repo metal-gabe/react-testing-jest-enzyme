@@ -96,7 +96,7 @@ describe("Testing if There Are Words Guessed", () => {
 
 	it("correct number of guessed words", () => {
 		// WHEN
-		const guessedWordNodes = findByTestAttr(wrapper, "guessed-word");
+		const guessedWordNodes = findByTestAttr(wrapper, "guessed-word-row");
 		// THEN
 		expect(guessedWordNodes.length).toBe(guessedWords.length);
 	});

@@ -8,6 +8,7 @@ import React from "react";
 import { mount } from "enzyme";
 
 // Context
+import GuessedWordsContext from "./contexts/guessedWordsContext";
 import LanguageContext from "./contexts/languageContext";
 import SuccessContext from "./contexts/successContext";
 
@@ -37,7 +38,9 @@ const setup = (props) => {
 	return mount(
 		<LanguageContext.Provider value={language}>
 			<SuccessContext.SuccessProvider value={[success, setSuccessMock]}>
-				<Input secretWord={secretWord} />
+				<GuessedWordsContext.GuessedWordsProvider>
+					<Input secretWord={secretWord} />
+				</GuessedWordsContext.GuessedWordsProvider>
 			</SuccessContext.SuccessProvider>
 		</LanguageContext.Provider>
 	);

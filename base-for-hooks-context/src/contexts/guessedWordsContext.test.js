@@ -1,6 +1,6 @@
-/* ========================================================================== */
+/* ============================================================================================== */
 // ALL REQUIRED IMPORTS
-/* ========================================================================== */
+/* ============================================================================================== */
 // React
 import React from "react";
 
@@ -16,9 +16,9 @@ import GuessedWordsContext from "./guessedWordsContext";
 // Utils / Methods
 // Styles
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // INTERNAL SET UP, UTILS, AND HELPER METHODS
-/* ========================================================================== */
+/* ============================================================================================== */
 // A fake functional component that calls `useGuessedWords` for our tests
 const FunctionalComponent = function () {
 	GuessedWordsContext.useGuessedWords();
@@ -29,15 +29,15 @@ const setup = (props = {}) => {
 	return shallow(<FunctionalComponent {...props} />);
 };
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // START OF ALL UNIT TESTS FOR THE `GUESSED WORDS CONTEXT` METHODS
-/* ========================================================================== */
+/* ============================================================================================== */
 describe("Testing the GuessedWordsContext and its Provider", () => {
 	it("should throw an Error when `useGuessedWords` is not wrapped in a GuessedWordsProvider", () => {
 		// THEN
 		expect(() => {
 			shallow(<FunctionalComponent />);
-		}).toThrow("useGuessedWords must be used within a GuessedWordsProvider");
+		}).toThrow("`useGuessedWords` must be used within a GuessedWordsProvider");
 	});
 
 	it("should NOT throw an Error when `useGuessedWords` is wrapped in a GuessedWordsProvider", () => {
@@ -48,6 +48,6 @@ describe("Testing the GuessedWordsContext and its Provider", () => {
 					<FunctionalComponent />
 				</GuessedWordsContext.GuessedWordsProvider>
 			);
-		}).not.toThrow("useGuessedWords must be used within a GuessedWordsProvider");
+		}).not.toThrow("`useGuessedWords` must be used within a GuessedWordsProvider");
 	});
 });
