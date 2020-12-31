@@ -1,6 +1,6 @@
-/* ========================================================================== */
+/* ============================================================================================== */
 // ALL REQUIRED IMPORTS
-/* ========================================================================== */
+/* ============================================================================================== */
 // React
 import React from "react";
 
@@ -23,10 +23,10 @@ import { findByTestAttr } from "./../test/testUtils";
 
 // Styles
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // INTERNAL SET UP, UTILS, AND HELPER METHODS
-/* ========================================================================== */
-const setup = (props = { guessedWords: [], secretWord: "party" }) => {
+/* ============================================================================================== */
+const setup = (props = { guessedWordsStrings: [], secretWord: "party" }) => {
 	const wrapper = mount(
 		<GuessedWordsContext.GuessedWordsProvider>
 			<SuccessContext.SuccessProvider>
@@ -39,7 +39,7 @@ const setup = (props = { guessedWords: [], secretWord: "party" }) => {
 	const submitButton = findByTestAttr(wrapper, "submit-button");
 
 	// pre-populating `guessedWords` context by simulating a word guess
-	props.guessedWords.map((word) => {
+	props.guessedWordsStrings.map((word) => {
 		const mockEvent = { target: { value: word } };
 		inputBox.simulate("change", mockEvent);
 		submitButton.simulate("click");
@@ -48,45 +48,64 @@ const setup = (props = { guessedWords: [], secretWord: "party" }) => {
 	return [wrapper, inputBox, submitButton];
 };
 
-/* ========================================================================== */
+/* ============================================================================================== */
 // START OF ALL UNIT TESTS FOR `SIMULATING GUESSES` COMPONENT
-/* ========================================================================== */
+/* ============================================================================================== */
 describe("Simulating & testing word guesses", () => {
 	let wrapper;
 	let inputBox;
 	let submitButton;
 
 	beforeEach(() => {
-		[wrapper, inputBox, submitButton] = setup();
-	});
-
-	describe("When the submitted guess is CORRECT", () => {
-		beforeEach(() => {
-			// GIVEN
-			const mockEvent = { target: { value: "party" } };
-			inputBox.simulate("change", mockEvent);
-			submitButton.simulate("click");
-		});
-
-		it("should NOT render any children inside of the `Input` component", () => {
-			// GIVEN
-			const inputComponent = findByTestAttr(wrapper, "component-input");
-			// THEN
-			expect(inputComponent.children().length).toBe(0);
+		[wrapper, inputBox, submitButton] = setup({
+			guessedWordsStrings: ["agile"],
+			secretWord: "party",
 		});
 	});
 
-	describe("when the submitted guess is INCORRECT", () => {
-		beforeEach(() => {
-			// GIVEN
-			const mockEvent = { target: { value: "train" } };
-			inputBox.simulate("change", mockEvent);
-			submitButton.simulate("click");
+	describe("When the `guessedWords` context is NOT empty", () => {
+		describe("When the submitted guess is CORRECT", () => {
+			beforeEach(() => {
+				// GIVEN
+				const mockEvent = { target: { value: "party" } };
+				inputBox.simulate("change", mockEvent);
+				submitButton.simulate("click");
+			});
+
+			it("should NOT render any children inside of the `Input` component", () => {
+				// GIVEN
+				const inputComponent = findByTestAttr(wrapper, "component-input");
+				// THEN
+				expect(inputComponent.children().length).toBe(0);
+			});
+
+			it("should show the same number of rows in `GuessedWords` as there were guesses made", () => {
+				// GIVEN
+				const guessedWordsTableRows = findByTestAttr(wrapper, "guessed-word");
+				// THEN
+				expect(guessedWordsTableRows.length).toBe(2);
+			});
 		});
 
-		it("should STILL render the `Input` component", () => {
-			// THEN
-			expect(inputBox.exists()).toBe(true);
+		describe("when the submitted guess is INCORRECT", () => {
+			beforeEach(() => {
+				// GIVEN
+				const mockEvent = { target: { value: "train" } };
+				inputBox.simulate("change", mockEvent);
+				submitButton.simulate("click");
+			});
+
+			it("should STILL render the `Input` component", () => {
+				// THEN
+				expect(inputBox.exists()).toBe(true);
+			});
+
+			it("should show the same number of rows in `GuessedWords` as there were guesses made", () => {
+				// GIVEN
+				const guessedWordsTableRows = findByTestAttr(wrapper, "guessed-word");
+				// THEN
+				expect(guessedWordsTableRows.length).toBe(2);
+			});
 		});
 	});
 });
