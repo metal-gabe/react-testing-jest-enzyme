@@ -92,6 +92,7 @@ const App = function () {
 			<section className="container app-info">
 				<h1>Jotto Bueller?</h1>
 				<p>Lesson: Base for Hooks Context</p>
+				<p>The secret word is: `{secretWord}`.</p>
 			</section>
 			<LanguageContext.Provider value={state.language}>
 				<LanguagePicker setLanguage={setLanguage} />

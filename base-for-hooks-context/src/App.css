@@ -8,6 +8,7 @@ body {
 .app {
 	border: 1px solid red;
 	color: #ffffff;
+	min-width: 600px;
 }
 
 .language-picker-container {
